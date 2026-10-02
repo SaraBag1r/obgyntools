@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://obgyntools.com/sitemap.xml

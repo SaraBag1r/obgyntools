@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contraceptive Eligibility · OBGYN Tools</title>
+<meta name="description" content="Contraceptive eligibility checker based on US MEC 2024: categories 1–4 for IUDs, implant, DMPA, progestin-only pills and combined hormonal contraception, with the reason for each.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="i18n.js"></script>
+<script>window.PAGE_TITLE=['Приемлемость контрацепции · OBGYN Tools','Contraceptive Eligibility · OBGYN Tools'];</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="contraception.html" aria-current="page"><span lang="ru">Контрацепция</span><span lang="en">Contraception</span></a>
+      <a href="menopause.html"><span lang="ru">МГТ</span><span lang="en">Menopause HT</span></a>
+      <a href="about.html"><span lang="ru">О проекте</span><span lang="en">About</span></a>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="ru" aria-pressed="false">RU</button><button data-lang="en" aria-pressed="true">EN</button></div>
+    </nav>
+  </header>
+  <div class="pagehead">
+    <h1><span lang="ru">Приемлемость контрацепции</span><span lang="en">Contraceptive eligibility</span></h1>
+    <p><span lang="ru">Отметьте состояния пациентки. Для каждого метода — категория US MEC 2024 и состояние, которое её определило.</span><span lang="en">Tick your patient's conditions. Each method gets its US MEC 2024 category and the condition that set it.</span></p>
+  </div>
+  <div class="layout">
+    <div class="form" id="form"></div>
+    <aside class="results" id="res"></aside>
+  </div>
+  <footer class="site-foot">
+    <div><span lang="ru">Справочный инструмент для врачей. Категории упрощены; при расхождениях действует</span><span lang="en">A reference aid for clinicians. Categories are simplified; where they differ, the source wins:</span> <a href="https://www.cdc.gov/contraception/hcp/usmec/index.html" target="_blank" rel="noopener">CDC US MEC 2024</a>. <a href="about.html"><span lang="ru">Источники и ограничения</span><span lang="en">Sources and limitations</span></a></div>
+  </footer>
+</div>
+<div class="bar" id="bar" title="Results"></div>
+
+<script>
+const METHODS=[
+  {id:'lng',name:['ЛНГ-ВМС (52 мг)','LNG-IUD (52 mg)'],s:['ЛНГ-ВМС','LNG-IUD'],fail:'0.1–0.4%'},
+  {id:'imp',name:['Имплант (этоногестрел)','Implant (etonogestrel)'],s:['Имплант','Implant'],fail:'0.1%'},
+  {id:'cu', name:['Медьсодержащая ВМС','Copper IUD'],s:['Cu-ВМС','Cu-IUD'],fail:'0.8%'},
+  {id:'dmpa',name:['ДМПА, инъекции','DMPA injection'],s:['ДМПА','DMPA'],fail:'4%'},
+  {id:'pop',name:['Прогестиновые таблетки (ЧПТ)','Progestin-only pill (POP)'],s:['ЧПТ','POP'],fail:'7%'},
+  {id:'chc',name:['КГК: КОК, кольцо, пластырь','CHC: pill, ring, patch'],s:['КГК','CHC'],fail:'7%'}
+];
+const ORDER=['cu','lng','imp','dmpa','pop','chc'];
+const CATTXT={1:['Без ограничений','No restriction'],2:['Польза обычно превышает риск','Benefits generally outweigh risks'],3:['Риск обычно превышает пользу','Risks usually outweigh benefits'],4:['Неприемлемый риск','Unacceptable health risk']};
+// [id, label, [Cu,LNG,Imp,DMPA,POP,CHC], sub, note]
+const GROUPS=[
+ {title:['Сердечно-сосудистые и тромбозы','Cardiovascular and thrombosis'],items:[
+  ['multiCV',['Несколько факторов риска ССЗ','Multiple CVD risk factors'],[1,2,2,3,2,3],['возраст, курение, СД, АГ, дислипидемия','older age, smoking, diabetes, hypertension, dyslipidemia'],['КГК: 3–4 в зависимости от сочетания','CHC: 3–4 depending on the combination']],
+  ['vasc',['Сосудистые заболевания','Vascular disease'],[1,2,2,3,2,4]],
+  ['htnPreg',['АГ при беременности в анамнезе','History of high BP in pregnancy'],[1,1,1,1,1,2],['сейчас АД в норме','BP now normal']],
+  ['vteAcute',['Острый ТГВ / ТЭЛА','Acute DVT / PE'],[2,2,2,2,2,4]],
+  ['vteHx',['ТГВ / ТЭЛА в анамнезе','History of DVT / PE'],[1,2,2,2,2,4],null,['КГК: 3 при низком риске рецидива','CHC: 3 if lower risk of recurrence']],
+  ['vteFam',['ТГВ / ТЭЛА у родственников 1-й линии','DVT / PE in first-degree relative'],[1,1,1,1,1,2]],
+  ['thromb',['Известная тромбофилия','Known thrombogenic mutation'],[1,2,2,2,2,4],['фактор V Лейден, протромбин, дефицит протеинов C/S, АТ III','factor V Leiden, prothrombin, protein C/S or antithrombin deficiency']],
+  ['surg',['Большая операция с иммобилизацией','Major surgery with prolonged immobilization'],[1,2,2,2,2,4]],
+  ['ihd',['ИБС (сейчас или в анамнезе)','Ischemic heart disease (current or history)'],[1,2,2,3,2,4],null,['ЛНГ-ВМС, имплант, ЧПТ: 3 при продолжении','LNG-IUD, implant, POP: 3 for continuation']],
+  ['stroke',['Инсульт в анамнезе','History of stroke'],[1,2,2,3,2,4],null,['Имплант, ЧПТ: 3 при продолжении','Implant, POP: 3 for continuation']],
+  ['lipid',['Дислипидемия без других факторов','Dyslipidemia, no other risk factors'],[1,2,2,2,2,2]],
+  ['valve',['Осложнённый порок клапанов','Complicated valvular heart disease'],[1,1,1,1,1,4],['лёгочная гипертензия, ФП, эндокардит в анамнезе','pulmonary hypertension, AF, history of endocarditis']],
+  ['aps',['СКВ с антифосфолипидными антителами','SLE with antiphospholipid antibodies'],[1,3,3,3,3,4]]
+ ]},
+ {title:['Неврология и лекарства','Neurology and drugs'],items:[
+  ['migNo',['Мигрень без ауры','Migraine without aura'],[1,1,1,1,1,2]],
+  ['migAura',['Мигрень с аурой','Migraine with aura'],[1,1,1,1,1,4]],
+  ['inducers',['Индукторы ферментов печени','Liver enzyme inducers'],[1,1,2,1,3,3],['карбамазепин, фенитоин, топирамат, рифампицин','carbamazepine, phenytoin, topiramate, rifampicin']],
+  ['lamo',['Ламотриджин в монотерапии','Lamotrigine monotherapy'],[1,1,1,1,1,3]]
+ ]},
+ {title:['Гинекология','Gynecology'],items:[
+  ['bleedUnk',['Кровотечение неясного генеза','Unexplained vaginal bleeding'],[4,4,3,3,2,2],['до обследования','before evaluation'],['ВМС: 4 при введении','IUD: 4 for initiation']],
+  ['heavy',['Обильные / длительные менструации','Heavy or prolonged bleeding'],[2,1,2,2,2,1]],
+  ['endo',['Эндометриоз','Endometriosis'],[2,1,1,1,1,1]],
+  ['dysm',['Выраженная дисменорея','Severe dysmenorrhea'],[2,1,1,1,1,1]],
+  ['cavity',['Деформация полости матки','Distorted uterine cavity'],[4,4,1,1,1,1],['миома или аномалия, мешающая введению ВМС','fibroids or anomaly incompatible with IUD placement']],
+  ['pid',['ВЗОМТ сейчас','Current PID'],[4,4,1,1,1,1],null,['ВМС: 2 при продолжении на фоне лечения','IUD: 2 for continuation with treatment']],
+  ['sti',['Гнойный цервицит, хламидиоз, гонорея','Purulent cervicitis, chlamydia, gonorrhea'],[4,4,1,1,1,1],['текущие','current']],
+  ['cin',['CIN','CIN'],[1,2,2,2,1,2]],
+  ['cxCa',['Рак шейки матки до лечения','Cervical cancer awaiting treatment'],[4,4,2,2,1,2]],
+  ['endCa',['Рак эндометрия','Endometrial cancer'],[4,4,1,1,1,1]]
+ ]},
+ {title:['Молочная железа','Breast'],items:[
+  ['brMass',['Недиагностированное образование','Undiagnosed mass'],[1,2,2,2,2,2]],
+  ['brCur',['Рак молочной железы сейчас','Current breast cancer'],[1,4,4,4,4,4]],
+  ['brPast',['РМЖ в анамнезе, ремиссия ≥ 5 лет','Past breast cancer, no disease ≥ 5 years'],[1,3,3,3,3,3]]
+ ]},
+ {title:['Эндокринология, печень, ЖКТ','Endocrine, liver, GI'],items:[
+  ['dm',['Сахарный диабет без осложнений','Diabetes without vascular disease'],[1,2,2,2,2,2]],
+  ['dmV',['СД с нефро-/рет-/нейропатией или > 20 лет','Diabetes with end-organ damage or > 20 years'],[1,2,2,3,2,3],null,['КГК: 3–4 в зависимости от тяжести','CHC: 3–4 depending on severity']],
+  ['gall',['ЖКБ с клиникой','Symptomatic gallbladder disease'],[1,2,2,2,2,3]],
+  ['chol',['Холестаз на фоне КОК в анамнезе','Past COC-related cholestasis'],[1,2,2,2,2,3]],
+  ['hep',['Острый вирусный гепатит','Acute viral hepatitis'],[1,1,1,1,1,3],null,['КГК: 3–4 в зависимости от тяжести','CHC: 3–4 depending on severity']],
+  ['cirr',['Декомпенсированный цирроз','Severe (decompensated) cirrhosis'],[1,3,3,3,3,4]],
+  ['liverT',['Гепатоцеллюлярная аденома или рак печени','Hepatocellular adenoma or liver cancer'],[1,3,3,3,3,4]],
+  ['bari',['Бариатрия с мальабсорбцией','Malabsorptive bariatric surgery'],[1,1,1,1,3,3],null,['КГК: 3 для таблеток; кольцо и пластырь — 1','CHC: 3 for pills; ring and patch 1']],
+  ['anemia',['Железодефицитная анемия','Iron-deficiency anemia'],[2,1,1,1,1,1]],
+  ['hiv',['ВИЧ-инфекция','HIV'],[2,2,1,1,1,1],null,['учитывать взаимодействия с АРВТ','check antiretroviral interactions']]
+ ]}
+];
+const EX={age:37,bmi:24,smoke:'lt15',bp:'norm',pp:'none',bf:false,ppRisk:false,checks:['migNo']};
+let s=JSON.parse(JSON.stringify(EX));
+
+function seg(name,title,opts,val){
+  return `<div class="seg-title">${t(title)}</div><div class="seg" role="radiogroup">`+
+   opts.map(([v,lab])=>`<label><input type="radio" name="${name}" id="${name}-${v}" value="${v}" ${v===val?'checked':''}><span>${t(lab)}</span></label>`).join('')+`</div>`;
+}
+function chk(id,label,sub,checked){
+  return `<label class="chk"><input type="checkbox" id="c-${id}" data-id="${id}" ${checked?'checked':''}><span>${t(label)}${sub?`<small>${t(sub)}</small>`:''}</span></label>`;
+}
+function renderForm(){
+  let h=`<div class="example"><span><b>${t(['Пример:','Example:'])}</b> ${t(['37 лет, курит до 15 сиг./сут, мигрень без ауры','37 years, smokes < 15 cigarettes/day, migraine without aura'])}</span><span style="display:flex;gap:6px"><button class="ghost" id="reset">${t(['Очистить','Clear'])}</button><button class="ghost" id="ex">${t(['Загрузить пример','Load example'])}</button></span></div>`;
+  h+=`<fieldset><legend>${t(['Пациентка','Patient'])}</legend><div class="row">
+   <div class="num"><label for="age">${t(['Возраст, лет','Age, years'])}</label><input id="age" type="number" min="10" max="60" value="${s.age}"></div>
+   <div class="num"><label for="bmi">${t(['ИМТ, кг/м²','BMI, kg/m²'])}</label><input id="bmi" type="number" min="12" max="70" step="0.1" value="${s.bmi}"></div></div>
+   ${seg('smoke',['Курение','Smoking'],[['none',['Не курит','Non-smoker']],['lt15',['< 15 сигарет в день','< 15 cigarettes/day']],['ge15',['≥ 15 сигарет в день','≥ 15 cigarettes/day']]],s.smoke)}
+   ${seg('bp',['Артериальное давление','Blood pressure'],[['norm',['Норма','Normal']],['ctrl',['АГ, контролируемая','Hypertension, controlled']],['mid',['140–159 / 90–99','140–159 / 90–99']],['high',['≥ 160 / ≥ 100','≥ 160 / ≥ 100']]],s.bp)}
+  </fieldset>`;
+  h+=`<fieldset><legend>${t(['Послеродовой период','Postpartum'])}</legend>
+   ${seg('pp',['Время после родов','Time since delivery'],[['none',['Нет / > 42 дней','Not postpartum / > 42 days']],['lt21',['< 21 дня','< 21 days']],['d21',['21–29 дней','21–29 days']],['d30',['30–42 дня','30–42 days']]],s.pp)}
+   <div class="checks" style="margin-top:10px">${chk('bf',['Грудное вскармливание','Breastfeeding'],null,s.bf)}${chk('ppRisk',['Доп. факторы риска ВТЭ после родов','Other postpartum VTE risk factors'],['кесарево, преэклампсия, ПРК, трансфузия, иммобилизация','cesarean, preeclampsia, PPH, transfusion, immobility'],s.ppRisk)}</div>
+  </fieldset>`;
+  GROUPS.forEach(g=>{
+    h+=`<fieldset><legend>${t(g.title)}</legend><div class="checks">`+g.items.map(it=>chk(it[0],it[1],it[3],s.checks.includes(it[0]))).join('')+`</div></fieldset>`;
+  });
+  document.getElementById('form').innerHTML=h;
+}
+function read(){
+  s.age=parseFloat(document.getElementById('age').value)||0;
+  s.bmi=parseFloat(document.getElementById('bmi').value)||0;
+  s.smoke=document.querySelector('input[name="smoke"]:checked').value;
+  s.bp=document.querySelector('input[name="bp"]:checked').value;
+  s.pp=document.querySelector('input[name="pp"]:checked').value;
+  s.bf=document.getElementById('c-bf').checked;
+  s.ppRisk=document.getElementById('c-ppRisk').checked;
+  s.checks=[...document.querySelectorAll('#form .checks input')].filter(x=>x.checked&&x.dataset.id!=='bf'&&x.dataset.id!=='ppRisk').map(x=>x.dataset.id);
+}
+function compute(s){
+  const R={};ORDER.forEach(m=>R[m]=[]);
+  const add=(arr,label,note)=>arr.forEach((c,i)=>{if(c>1)R[ORDER[i]].push({c,label,note})});
+  const a=s.age;
+  if(a>0){
+    if(a<18) add([2,2,1,2,1,1],['Возраст < 18 лет','Age < 18']);
+    else if(a<20) add([2,2,1,1,1,1],['Возраст < 20 лет','Age < 20']);
+    if(a>=40&&a<=45) add([1,1,1,1,1,2],['Возраст ≥ 40 лет','Age ≥ 40']);
+    if(a>45) add([1,1,1,2,1,2],['Возраст > 45 лет','Age > 45']);
+  }
+  if(s.smoke!=='none'){
+    if(a<35) add([1,1,1,1,1,2],['Курение, возраст < 35','Smoking, age < 35']);
+    else if(s.smoke==='lt15') add([1,1,1,1,1,3],['Курение < 15 сиг./сут, ≥ 35 лет','Smoking < 15/day, age ≥ 35']);
+    else add([1,1,1,1,1,4],['Курение ≥ 15 сиг./сут, ≥ 35 лет','Smoking ≥ 15/day, age ≥ 35']);
+  }
+  if(s.bmi>=30) add([1,1,1,1,1,2],['ИМТ ≥ 30','BMI ≥ 30']);
+  if(s.bp==='ctrl') add([1,1,1,2,1,3],['АГ, контролируемая','Adequately controlled hypertension']);
+  if(s.bp==='mid') add([1,1,1,2,1,3],['АД 140–159 / 90–99','BP 140–159 / 90–99']);
+  if(s.bp==='high') add([1,2,2,3,2,4],['АД ≥ 160 / ≥ 100','BP ≥ 160 / ≥ 100']);
+  if(s.pp!=='none'){
+    const vte=s.ppRisk||a>=35||s.bmi>=30||s.smoke!=='none';
+    const iud=(s.pp==='lt21'||s.pp==='d21')?2:1;
+    let chc;
+    if(s.bf) chc=s.pp==='lt21'?4:s.pp==='d21'?3:(vte?3:2);
+    else chc=s.pp==='lt21'?4:(vte?3:2);
+    const lbl={lt21:['< 21 дня','< 21 days'],d21:['21–29 дней','21–29 days'],d30:['30–42 дня','30–42 days']}[s.pp];
+    const label=[`После родов ${lbl[0]}${s.bf?', ГВ':''}${vte&&s.pp!=='lt21'?', есть факторы риска ВТЭ':''}`,`Postpartum ${lbl[1]}${s.bf?', breastfeeding':''}${vte&&s.pp!=='lt21'?', VTE risk factors':''}`];
+    add([iud,iud,1,1,1,chc],label,iud===2?['ВМС: 1 при введении в первые 10 мин после плаценты; 4 при послеродовом сепсисе','IUD: 1 if placed within 10 min of placenta; 4 with puerperal sepsis']:null);
+  } else if(s.bf){
+    add([1,1,1,1,1,2],['ГВ, > 42 дней после родов','Breastfeeding, > 42 days postpartum']);
+  }
+  GROUPS.forEach(g=>g.items.forEach(it=>{if(s.checks.includes(it[0]))add(it[2],it[1],it[4])}));
+  return METHODS.map(m=>{const rs=R[m.id].sort((x,y)=>y.c-x.c);return {...m,cat:rs.length?rs[0].c:1,reasons:rs}}).sort((x,y)=>x.cat-y.cat);
+}
+function renderRes(){
+  const res=compute(s);
+  const ok=res.filter(r=>r.cat===1).map(r=>t(r.s));
+  let h=`<div class="res-head"><h2>${t(['Приемлемость методов','Method eligibility'])}</h2><span>US MEC 2024</span></div>`;
+  h+=`<p class="note">${ok.length?`<b style="color:var(--ink)">${t(['Без ограничений:','No restriction:'])}</b> ${ok.join(', ')}.`:t(['Нет методов категории 1 — нужна индивидуальная оценка.','No category 1 methods — individual assessment needed.'])} ${t(['Сортировка: по категории, затем по эффективности.','Sorted by category, then by effectiveness.'])}</p>`;
+  res.forEach(r=>{
+    h+=`<div class="mcard"><div class="cat k${r.cat}" aria-label="${t(['Категория','Category'])} ${r.cat}">${r.cat}</div><div style="min-width:0">
+      <h3>${t(r.name)}</h3><div class="verdict" style="color:var(--c${r.cat})">${t(CATTXT[r.cat])}</div>
+      <div class="meta">${t(['Неудачи за 1-й год, типичное применение:','First-year failure, typical use:'])} ${LANG==='ru'?r.fail.replace(/\./g,','):r.fail}</div>
+      ${r.reasons.length?`<ul>${r.reasons.map(x=>`<li><b>${x.c}</b> · ${t(x.label)}${x.note?` <i>(${t(x.note)})</i>`:''}</li>`).join('')}</ul>`:''}
+    </div></div>`;
+  });
+  h+=`<div class="legend">${[1,2,3,4].map(c=>`<div><i class="k${c}">${c}</i>${t(CATTXT[c])}</div>`).join('')}</div>`;
+  document.getElementById('res').innerHTML=h;
+  document.getElementById('bar').innerHTML=METHODS.map(m=>{const r=res.find(x=>x.id===m.id);return `<span class="chip"><i class="k${r.cat}">${r.cat}</i>${t(m.s)}</span>`}).join('');
+}
+const f=document.getElementById('form');
+f.addEventListener('input',()=>{read();renderRes()});
+f.addEventListener('change',()=>{read();renderRes()});
+f.addEventListener('click',e=>{
+  if(e.target.id==='reset'){s={age:'',bmi:'',smoke:'none',bp:'norm',pp:'none',bf:false,ppRisk:false,checks:[]};renderForm();renderRes()}
+  if(e.target.id==='ex'){s=JSON.parse(JSON.stringify(EX));renderForm();renderRes()}
+});
+document.getElementById('bar').onclick=()=>document.getElementById('res').scrollIntoView({behavior:'smooth'});
+window.onLang=()=>{renderForm();renderRes()};
+renderForm();renderRes();
+</script>
+</body>
+</html>

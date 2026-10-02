@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menopausal Hormone Therapy · OBGYN Tools</title>
+<meta name="description" content="Menopausal hormone therapy planner: contraindications, timing window, regimen, route, estradiol doses, progestogen choice and non-hormonal alternatives.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="i18n.js"></script>
+<script>window.PAGE_TITLE=['Менопаузальная гормонотерапия · OBGYN Tools','Menopausal Hormone Therapy · OBGYN Tools'];</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="contraception.html"><span lang="ru">Контрацепция</span><span lang="en">Contraception</span></a>
+      <a href="menopause.html" aria-current="page"><span lang="ru">МГТ</span><span lang="en">Menopause HT</span></a>
+      <a href="about.html"><span lang="ru">О проекте</span><span lang="en">About</span></a>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="ru" aria-pressed="false">RU</button><button data-lang="en" aria-pressed="true">EN</button></div>
+    </nav>
+  </header>
+  <div class="pagehead">
+    <h1><span lang="ru">Менопаузальная гормонотерапия</span><span lang="en">Menopausal hormone therapy</span></h1>
+    <p><span lang="ru">Возраст, стаж менопаузы, матка, жалобы и риски → вердикт, режим, путь введения, дозы и прогестаген.</span><span lang="en">Age, time since menopause, uterus, symptoms and risks → verdict, regimen, route, doses and progestogen.</span></p>
+  </div>
+  <div class="layout">
+    <div class="form" id="form"></div>
+    <aside class="results" id="res"></aside>
+  </div>
+  <footer class="site-foot">
+    <div><span lang="ru">Справочный инструмент для врачей. Дозы ориентировочные; проверяйте регистрацию препаратов в своей стране.</span><span lang="en">A reference aid for clinicians. Doses are indicative; check product availability in your country.</span> <a href="about.html"><span lang="ru">Источники и ограничения</span><span lang="en">Sources and limitations</span></a></div>
+  </footer>
+</div>
+
+<script>
+const CI=[
+  ['bc',['Рак молочной железы','Breast cancer'],['текущий или в анамнезе','current or past']],
+  ['ec',['Рак эндометрия или иная эстрогензависимая опухоль','Endometrial or other estrogen-dependent cancer']],
+  ['bleed',['Кровотечение из половых путей неясного генеза','Undiagnosed genital bleeding']],
+  ['hyper',['Нелеченная гиперплазия эндометрия','Untreated endometrial hyperplasia']],
+  ['vte',['ТГВ / ТЭЛА сейчас или в анамнезе','Current or past DVT / PE']],
+  ['art',['Инфаркт, инсульт, ИБС','MI, stroke, coronary heart disease']],
+  ['liver',['Острое или тяжёлое заболевание печени','Active or severe liver disease']],
+  ['porph',['Порфирия','Porphyria']]
+];
+const RISK=[
+  ['bmi',['ИМТ ≥ 30','BMI ≥ 30']],
+  ['thr',['Тромбофилия или ВТЭ у родственников','Thrombophilia or family history of VTE']],
+  ['mig',['Мигрень','Migraine']],
+  ['tg',['Гипертриглицеридемия','Hypertriglyceridemia']],
+  ['gall',['Желчнокаменная болезнь','Gallbladder disease']],
+  ['dm',['Сахарный диабет','Diabetes']],
+  ['htn',['Артериальная гипертензия','Hypertension']],
+  ['smk',['Курение','Smoking']],
+  ['men',['Менингиома','Meningioma'],['сейчас или в анамнезе','current or past']],
+  ['endo',['Эндометриоз в анамнезе','History of endometriosis']],
+  ['myoma',['Миома матки','Uterine fibroids']]
+];
+const SYM=[
+  ['vms',['Приливы, потливость','Hot flushes, night sweats'],['вазомоторные симптомы','vasomotor symptoms']],
+  ['gsm',['Сухость влагалища, диспареуния, дизурия','Vaginal dryness, dyspareunia, dysuria'],['генитоуринарный синдром','genitourinary syndrome']],
+  ['sleep',['Нарушения сна, перепады настроения','Sleep disturbance, mood changes']],
+  ['bone',['Остеопения или высокий риск переломов','Osteopenia or high fracture risk']]
+];
+const EX={age:52,status:'post',yrs:2,uterus:'yes',sym:['vms','sleep'],ci:[],risk:['bmi']};
+let s=JSON.parse(JSON.stringify(EX));
+
+function seg(name,title,opts,val){
+  return `<div class="seg-title">${t(title)}</div><div class="seg" role="radiogroup">`+
+   opts.map(([v,lab])=>`<label><input type="radio" name="${name}" id="${name}-${v}" value="${v}" ${v===val?'checked':''}><span>${t(lab)}</span></label>`).join('')+`</div>`;
+}
+function chk(x,checked){
+  return `<label class="chk"><input type="checkbox" id="m-${x[0]}" ${checked?'checked':''}><span>${t(x[1])}${x[2]?`<small>${t(x[2])}</small>`:''}</span></label>`;
+}
+function renderForm(){
+  let h=`<div class="example"><span><b>${t(['Пример:','Example:'])}</b> ${t(['52 года, 2 года постменопаузы, матка сохранена, приливы, ИМТ 31','52 years, 2 years postmenopausal, intact uterus, hot flushes, BMI 31'])}</span><span style="display:flex;gap:6px"><button class="ghost" id="reset">${t(['Очистить','Clear'])}</button><button class="ghost" id="ex">${t(['Загрузить пример','Load example'])}</button></span></div>`;
+  h+=`<fieldset><legend>${t(['Пациентка','Patient'])}</legend><div class="row">
+    <div class="num"><label for="age">${t(['Возраст, лет','Age, years'])}</label><input id="age" type="number" min="25" max="85" value="${s.age}"></div>
+    <div class="num" id="yrs-wrap" ${s.status==='peri'?'hidden':''}><label for="yrs">${t(['Лет после последней менструации','Years since final period'])}</label><input id="yrs" type="number" min="0" max="40" step="0.5" value="${s.yrs}"></div></div>
+    ${seg('status',['Статус','Status'],[['peri',['Перименопауза (менструации ещё есть)','Perimenopause (still menstruating)']],['post',['Постменопауза (≥ 12 мес. без менструаций)','Postmenopause (≥ 12 months amenorrhea)']]],s.status)}
+    ${seg('uterus',['Матка','Uterus'],[['yes',['Сохранена','Intact']],['no',['Гистерэктомия','Hysterectomy']]],s.uterus)}
+  </fieldset>`;
+  h+=`<fieldset><legend>${t(['Жалобы и показания','Symptoms and indications'])}</legend><div class="checks">${SYM.map(x=>chk(x,s.sym.includes(x[0]))).join('')}</div></fieldset>`;
+  h+=`<fieldset><legend>${t(['Противопоказания к системной МГТ','Contraindications to systemic HT'])}</legend><div class="checks">${CI.map(x=>chk(x,s.ci.includes(x[0]))).join('')}</div></fieldset>`;
+  h+=`<fieldset><legend>${t(['Факторы, влияющие на выбор препарата и пути','Factors that shape product and route'])}</legend><div class="checks">${RISK.map(x=>chk(x,s.risk.includes(x[0]))).join('')}</div></fieldset>`;
+  document.getElementById('form').innerHTML=h;
+}
+function read(){
+  s.age=parseFloat(document.getElementById('age').value)||0;
+  s.yrs=parseFloat(document.getElementById('yrs').value)||0;
+  s.status=document.querySelector('input[name="status"]:checked').value;
+  s.uterus=document.querySelector('input[name="uterus"]:checked').value;
+  const got=list=>list.map(x=>x[0]).filter(id=>document.getElementById('m-'+id).checked);
+  s.sym=got(SYM);s.ci=got(CI);s.risk=got(RISK);
+  document.getElementById('yrs-wrap').hidden=s.status==='peri';
+}
+function compute(s){
+  const out={blocks:[]};
+  const has=(a,id)=>a.includes(id);
+  const poi=s.age>0&&s.age<40;
+  const yrs=s.status==='peri'?0:s.yrs;
+  const systemic=has(s.sym,'vms')||has(s.sym,'sleep')||has(s.sym,'bone')||poi;
+  const onlyGsm=has(s.sym,'gsm')&&!systemic;
+  const ciNames=CI.filter(x=>has(s.ci,x[0])).map(x=>t(x[1]));
+  const riskNames=RISK.filter(x=>has(s.risk,x[0])&&!['men','endo','myoma'].includes(x[0])).map(x=>t(x[1]));
+  const nonHormonal={t:['Негормональные варианты при приливах','Non-hormonal options for vasomotor symptoms'],l:[
+    ['Антагонисты NK3-рецепторов: фезолинетант 45 мг/сут; проверьте регистрацию в вашей стране','NK3 receptor antagonists: fezolinetant 45 mg/day; check approval in your country'],
+    ['СИОЗС/СИОЗСН: пароксетин 7,5 мг, венлафаксин 37,5–75 мг, эсциталопрам 10–20 мг (пароксетин не сочетать с тамоксифеном)','SSRI/SNRI: paroxetine 7.5 mg, venlafaxine 37.5–75 mg, escitalopram 10–20 mg (avoid paroxetine with tamoxifen)'],
+    ['Габапентин 300–900 мг на ночь','Gabapentin 300–900 mg at bedtime'],
+    ['КПТ, клиническая гипнотерапия, снижение массы тела','CBT, clinical hypnosis, weight loss']
+  ]};
+  const localGsm={t:['Генитоуринарный синдром','Genitourinary syndrome'],l:[
+    ['Вагинальные эстрогены в низкой дозе, например эстриол 0,5 мг ежедневно 2–3 нед., затем 2 раза в неделю','Low-dose vaginal estrogen, e.g. estriol 0.5 mg daily for 2–3 weeks, then twice weekly'],
+    ['Прогестаген при локальных низкодозовых эстрогенах не нужен','No progestogen needed with low-dose vaginal estrogen'],
+    ['Увлажняющие средства и лубриканты; альтернатива — оспемифен, прастерон','Moisturizers and lubricants; alternatives: ospemifene, prasterone']
+  ]};
+
+  if(!s.sym.length&&!poi){
+    out.level='local';out.lbl=['Нет показаний','No indication'];out.title=['Отметьте жалобы или показания','Tick symptoms or indications'];
+    out.text=['МГТ назначают при климактерических симптомах, ПНЯ или для профилактики остеопороза у женщин моложе 60 лет.','HT is indicated for menopausal symptoms, premature ovarian insufficiency, or fracture prevention in women under 60.'];
+    return out;
+  }
+  if(ciNames.length&&!onlyGsm){
+    out.level='no';out.lbl=['Противопоказано','Contraindicated'];out.title=['Системная МГТ противопоказана','Systemic HT is contraindicated'];
+    out.text=[t(['Причина: ','Reason: '])+ciNames.join('; ').toLowerCase()+'.'];
+    if(has(s.ci,'vte')&&ciNames.length===1) out.blocks.push({t:['Комментарий','Note'],p:['Часть зарубежных руководств допускает трансдермальный эстрадиол + микронизированный прогестерон при ВТЭ в анамнезе после консультации гематолога. В клинических рекомендациях РФ ВТЭ — противопоказание.','Some guidelines allow transdermal estradiol with micronized progesterone after past VTE, with haematology input. The Russian national guideline lists VTE as a contraindication.']});
+    out.blocks.push(nonHormonal);
+    if(has(s.sym,'gsm')) out.blocks.push({t:['Генитоуринарный синдром','Genitourinary syndrome'],l:[
+      has(s.ci,'bc')?['Вагинальные эстрогены при РМЖ — только по согласованию с онкологом, особенно на фоне ингибиторов ароматазы','Vaginal estrogen after breast cancer only with the oncologist, especially on aromatase inhibitors']:['Низкодозовые вагинальные эстрогены возможны: системное всасывание минимально','Low-dose vaginal estrogen is possible: systemic absorption is minimal'],
+      ['Негормональные увлажняющие средства и лубриканты — первая линия','Non-hormonal moisturizers and lubricants are first line']]});
+    return out;
+  }
+  if(onlyGsm){
+    out.level='local';out.lbl=['Локальная терапия','Local therapy'];out.title=['Достаточно вагинальных эстрогенов','Vaginal estrogen is enough'];
+    out.text=['Системная МГТ только при генитоуринарном синдроме не нужна.','Systemic HT is not needed for genitourinary symptoms alone.'];
+    out.blocks.push(localGsm);
+    if(ciNames.length) out.blocks.push({t:['Обратите внимание','Note'],p:[t(['Есть противопоказания к системной МГТ: ','Contraindications to systemic HT present: '])+ciNames.join('; ').toLowerCase()+t(['. Локальную терапию согласуйте с профильным специалистом.','. Agree local therapy with the relevant specialist.'])]});
+    return out;
+  }
+  const late=!poi&&(s.age>=60||yrs>=10);
+  if(poi){out.level='ok';out.lbl=['Показана','Indicated'];out.title=['ПНЯ: МГТ показана','POI: hormone therapy indicated'];out.text=['Гормонотерапия рекомендуется как минимум до среднего возраста естественной менопаузы (около 50–51 года). Дозы эстрогенов обычно выше, чем в постменопаузе.','Continue at least until the average age of natural menopause (about 50–51). Estrogen doses are usually higher than in postmenopause.']}
+  else if(late){out.level='caution';out.lbl=['С осторожностью','Use with caution'];out.title=['Начало вне «окна возможностей»','Starting outside the timing window'];out.text=[(s.age>=60?'Возраст ≥ 60 лет':'≥ 10 лет после менопаузы')+': соотношение польза/риск менее благоприятно. Только при выраженных симптомах, после оценки сердечно-сосудистого риска, в минимальной дозе, трансдермально.',(s.age>=60?'Age ≥ 60':'≥ 10 years since menopause')+': the benefit–risk balance is less favourable. Use only for significant symptoms, after cardiovascular risk assessment, at the lowest dose, transdermally.']}
+  else if(riskNames.length){out.level='caution';out.lbl=['Показана, с учётом рисков','Indicated, with risk factors'];out.title=['МГТ возможна, предпочтителен трансдермальный путь','HT is appropriate; prefer transdermal'];out.text=['Возраст < 60 лет и < 10 лет после менопаузы — благоприятное окно. Есть факторы, которые влияют на выбор пути введения.','Under 60 and within 10 years of menopause: favourable window. Some factors affect the choice of route.']}
+  else {out.level='ok';out.lbl=['Показана','Indicated'];out.title=['Благоприятное окно для МГТ','Favourable window for HT'];out.text=['Возраст < 60 лет и < 10 лет после менопаузы: при симптомах польза обычно превышает риски.','Under 60 and within 10 years of menopause: for symptomatic women, benefits generally outweigh risks.']}
+
+  let reg;
+  if(s.uterus==='no'){
+    reg={t:['Режим','Regimen'],l:[['Монотерапия эстрогенами — прогестаген не нужен','Estrogen alone — no progestogen needed']]};
+    if(has(s.risk,'endo')) reg.l.push(['Эндометриоз в анамнезе: рассмотрите добавление прогестагена и после гистерэктомии','History of endometriosis: consider adding a progestogen even after hysterectomy']);
+  } else if(s.status==='peri'||yrs<1){
+    reg={t:['Режим','Regimen'],l:[['Циклический (последовательный): эстроген непрерывно + прогестаген 12–14 дней в месяц','Sequential: continuous estrogen + progestogen 12–14 days a month'],['Ожидаемы регулярные менструальноподобные кровотечения','Expect regular withdrawal bleeds'],['Через 1 год постменопаузы — переход на непрерывный комбинированный режим','Switch to continuous combined after 1 year of postmenopause']]};
+  } else {
+    reg={t:['Режим','Regimen'],l:[['Непрерывный комбинированный: эстроген + прогестаген ежедневно','Continuous combined: estrogen + progestogen daily'],['Мажущие выделения в первые 3–6 мес. допустимы; дольше — обследование эндометрия','Spotting is acceptable for 3–6 months; beyond that, assess the endometrium']]};
+  }
+  out.blocks.push(reg);
+  const transPref=late||riskNames.length>0;
+  const route={t:['Путь введения','Route'],l:[]};
+  if(transPref){
+    route.l.push(['<b>Трансдермальный эстрадиол предпочтителен</b> — не повышает риск ВТЭ и меньше влияет на печень, триглицериды и желчный пузырь','<b>Transdermal estradiol preferred</b> — no increase in VTE risk and less effect on liver, triglycerides and gallbladder']);
+    if(riskNames.length) route.l.push([t(['Учтено: ','Considered: '])+riskNames.join(', ').toLowerCase()]);
+  } else route.l.push(['Пероральный или трансдермальный — по выбору пациентки','Oral or transdermal — patient preference']);
+  out.blocks.push(route);
+  out.blocks.push({t:['Ориентировочные дозы эстрадиола','Indicative estradiol doses'],l:[
+    poi?['Гель 1,5–3 мг/сут или пластырь 75–100 мкг/сут; перорально 2–4 мг/сут','Gel 1.5–3 mg/day or patch 75–100 µg/day; oral 2–4 mg/day']
+    :late?['Гель 0,5 мг/сут или пластырь 25 мкг/сут — начинать с минимальной дозы','Gel 0.5 mg/day or patch 25 µg/day — start at the lowest dose']
+    :transPref?['Гель 0,5–1,5 мг/сут или пластырь 25–50 мкг/сут','Gel 0.5–1.5 mg/day or patch 25–50 µg/day']
+    :['Гель 0,5–1,5 мг/сут или пластырь 25–50 мкг/сут; перорально 1–2 мг/сут (ультранизкая доза 0,5 мг)','Gel 0.5–1.5 mg/day or patch 25–50 µg/day; oral 1–2 mg/day (ultra-low 0.5 mg)']]});
+  if(s.uterus==='yes'||has(s.risk,'endo')){
+    const cyc=s.uterus==='yes'&&(s.status==='peri'||yrs<1);
+    const pg={t:['Прогестаген','Progestogen'],l:cyc?[
+      ['Микронизированный прогестерон 200 мг/сут 12–14 дней','Micronized progesterone 200 mg/day for 12–14 days'],
+      ['Дидрогестерон 10 мг/сут 14 дней','Dydrogesterone 10 mg/day for 14 days'],
+      ['ЛНГ-ВМС 52 мг — защищает эндометрий и даёт контрацепцию в перименопаузе','LNG-IUD 52 mg — protects the endometrium and provides perimenopausal contraception']]:[
+      ['Микронизированный прогестерон 100 мг/сут непрерывно','Micronized progesterone 100 mg/day continuously'],
+      ['Дидрогестерон 5 мг/сут (в составе фиксированной комбинации)','Dydrogesterone 5 mg/day (fixed combination)'],
+      ['Дроспиренон 2 мг + эстрадиол 1 мг — при АГ полезен антиминералокортикоидный эффект','Drospirenone 2 mg + estradiol 1 mg — antimineralocorticoid effect helps with hypertension'],
+      ['ЛНГ-ВМС 52 мг','LNG-IUD 52 mg']]};
+    pg.l.push(['Микронизированный прогестерон и дидрогестерон нейтральнее остальных по риску РМЖ и ВТЭ','Micronized progesterone and dydrogesterone appear more neutral for breast cancer and VTE risk']);
+    if(has(s.risk,'men')) pg.l.push(['<b>Менингиома:</b> избегать ципротерона, номегэстрола, хлормадинона','<b>Meningioma:</b> avoid cyproterone, nomegestrol and chlormadinone']);
+    out.blocks.push(pg);
+  }
+  if(has(s.sym,'gsm')) out.blocks.push({t:['Генитоуринарный синдром','Genitourinary syndrome'],l:[['Если на системной МГТ симптомы сохраняются, добавьте вагинальный эстриол','If symptoms persist on systemic HT, add vaginal estrogen']]});
+  if(has(s.risk,'myoma')) out.blocks.push({t:['Миома матки','Uterine fibroids'],l:[['УЗИ-контроль через 6–12 мес.; предпочтительны низкие дозы и трансдермальный путь','Ultrasound at 6–12 months; prefer low doses and transdermal route']]});
+  if(s.status==='peri') out.blocks.push({t:['Контрацепция','Contraception'],l:[['МГТ не предохраняет от беременности. Варианты: ЛНГ-ВМС как прогестиновый компонент, барьерные методы; после 50 лет — до 12 мес. аменореи','HT is not contraception. Options: LNG-IUD as the progestogen, barrier methods; after 50, until 12 months of amenorrhea']]});
+  out.blocks.push({t:['Обследование до старта','Before starting'],l:[['Маммография (не старше 12 мес.)','Mammogram within 12 months'], s.uterus==='yes'?['УЗИ органов малого таза, цитология шейки матки','Pelvic ultrasound, cervical screening up to date']:['Цитология — по показаниям','Cervical screening as indicated'],['АД, ИМТ, липидный профиль, глюкоза','BP, BMI, lipid profile, glucose'],['ТТГ и коагулограмма — по показаниям','TSH and coagulation tests as indicated']]});
+  out.blocks.push({t:['Наблюдение','Follow-up'],l:[['Контроль через 3 мес., затем ежегодно','Review at 3 months, then yearly'],['Жёсткого ограничения длительности нет: решение о продолжении — ежегодно, по соотношению польза/риск','No fixed time limit: reassess benefits and risks yearly']]});
+  return out;
+}
+function renderRes(){
+  const r=compute(s);
+  let h=`<div class="res-head"><h2>${t(['Тактика','Plan'])}</h2><span>${t(['Menopause Society 2022 · КР МЗ РФ','Menopause Society 2022 · IMS'])}</span></div>`;
+  h+=`<div class="banner b-${r.level}"><div class="lbl">${t(r.lbl)}</div><h3>${t(r.title)}</h3><p>${t(r.text.length===1?[r.text[0],r.text[0]]:r.text)}</p></div>`;
+  r.blocks.forEach(b=>{
+    h+=`<div class="block"><h4>${t(b.t)}</h4>${b.p?`<p>${t(b.p.length===1?[b.p[0],b.p[0]]:b.p)}</p>`:''}${b.l?`<ul>${b.l.map(x=>`<li>${x.length===1?x[0]:t(x)}</li>`).join('')}</ul>`:''}</div>`;
+  });
+  document.getElementById('res').innerHTML=h;
+}
+const f=document.getElementById('form');
+f.addEventListener('input',()=>{read();renderRes()});
+f.addEventListener('change',()=>{read();renderRes()});
+f.addEventListener('click',e=>{
+  if(e.target.id==='reset'){s={age:'',status:'post',yrs:'',uterus:'yes',sym:[],ci:[],risk:[]};renderForm();renderRes()}
+  if(e.target.id==='ex'){s=JSON.parse(JSON.stringify(EX));renderForm();renderRes()}
+});
+window.onLang=()=>{renderForm();renderRes()};
+renderForm();renderRes();
+</script>
+</body>
+</html>
