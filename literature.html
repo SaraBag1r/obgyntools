@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OB-GYN Literature · OBGYN Tools</title>
+<meta name="description" content="Fresh OB-GYN trials, meta-analyses and guidelines from PubMed, updated automatically, plus a curated list of landmark studies that changed obstetric and gynecologic practice.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="i18n.js"></script>
+<script>window.PAGE_TITLE=['Литература по акушерству и гинекологии · OBGYN Tools','OB-GYN Literature · OBGYN Tools'];</script>
+<style>
+.lit-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 14px}
+.lit-tabs button{font:500 13px var(--f-body);padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);cursor:pointer}
+.lit-tabs button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.papers{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.paper{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0}
+.paper a.t{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;line-height:1.35}
+.paper a.t:hover{color:var(--accent);text-decoration:underline}
+.paper .m{font-size:12.5px;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+.paper .why{font-size:14px;margin-top:6px}
+.tag{display:inline-block;font:600 11px var(--f-body);letter-spacing:.04em;padding:2px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent);margin-right:4px}
+.lit-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.lit-grid{grid-template-columns:minmax(0,1fr)}}
+.grp{margin:18px 0 8px;font:600 11px var(--f-body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.skeleton{height:62px;border-radius:var(--r);background:var(--sunk)}
+.updated{display:inline-block;font:500 12px var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="contraception.html"><span lang="ru">Контрацепция</span><span lang="en">Contraception</span></a>
+      <a href="menopause.html"><span lang="ru">МГТ</span><span lang="en">Menopause HT</span></a>
+      <a href="literature.html" aria-current="page"><span lang="ru">Литература</span><span lang="en">Literature</span></a>
+      <a href="about.html"><span lang="ru">О проекте</span><span lang="en">About</span></a>
+      <a href="pacientkam.html"><span lang="ru">Для пациенток</span><span lang="en">For patients (RU)</span></a>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="ru" aria-pressed="false">RU</button><button data-lang="en" aria-pressed="true">EN</button></div>
+    </nav>
+  </header>
+
+  <div class="pagehead">
+    <h1><span lang="ru">Литература: что нового и что изменило практику</span><span lang="en">Literature: what's new and what changed practice</span></h1>
+    <p><span lang="ru">Слева — свежие РКИ, метаанализы и гайдлайны из ведущих журналов, лента обновляется автоматически из PubMed при каждом открытии. Справа — подборка исследований, которые изменили акушерство и гинекологию; она регулярно пополняется.</span><span lang="en">Left: fresh RCTs, meta-analyses and guidelines from leading journals, pulled live from PubMed every time you open the page. Right: a curated set of studies that changed obstetrics and gynecology, expanded regularly.</span></p>
+  </div>
+
+  <div class="lit-grid">
+    <section>
+      <h2 class="res-head" style="margin:0 0 8px"><span style="font-family:var(--f-display);font-size:21px;color:var(--ink)"><span lang="ru">Свежие исследования</span><span lang="en">Latest research</span></span></h2>
+      <div class="lit-tabs" id="tabs" role="group" aria-label="Topic"></div>
+      <ul class="papers" id="feed" aria-live="polite"></ul>
+      <p class="note" id="feedNote" style="margin-top:10px"></p>
+    </section>
+
+    <section>
+      <h2 style="margin:0 0 8px;font-family:var(--f-display);font-size:21px"><span lang="ru">Исследования, которые изменили практику</span><span lang="en">Studies that changed practice</span></h2>
+      <span class="updated"><span lang="ru">Подборка пополняется · обновлено в октябре 2026</span><span lang="en">Growing list · updated October 2026</span></span>
+      <div id="landmarks"></div>
+    </section>
+  </div>
+
+  <footer class="site-foot">
+    <div><span lang="ru">Лента формируется автоматически через открытый API PubMed (NCBI E-utilities): последние 180 дней, ведущие журналы, только РКИ, метаанализы, систематические обзоры и клинические рекомендации. Отбор статей не означает их одобрения.</span><span lang="en">The feed is built automatically via PubMed's open API (NCBI E-utilities): last 180 days, leading journals, RCTs, meta-analyses, systematic reviews and guidelines only. Inclusion is not endorsement.</span> <a href="about.html"><span lang="ru">О проекте</span><span lang="en">About</span></a></div>
+    <div>© 2026 obgyntools</div>
+  </footer>
+</div>
+
+<script>
+const EU='https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
+const JOURNALS=['N Engl J Med','Lancet','JAMA','BMJ','Obstet Gynecol','Am J Obstet Gynecol','BJOG','Ultrasound Obstet Gynecol','Hum Reprod','Fertil Steril','Gynecol Oncol','Lancet Oncol','Menopause','Cochrane Database Syst Rev'];
+const JQ='('+JOURNALS.map(j=>`"${j}"[ta]`).join(' OR ')+')';
+const TYPES='(Randomized Controlled Trial[pt] OR Meta-Analysis[pt] OR Systematic Review[pt] OR Practice Guideline[pt] OR Guideline[pt])';
+const TOPICS=[
+  {id:'all',name:['Все','All'],q:'("Pregnancy Complications"[MeSH] OR "Labor, Obstetric"[MeSH] OR "Genital Diseases, Female"[MeSH] OR "Genital Neoplasms, Female"[MeSH] OR "Contraception"[MeSH] OR "Infertility, Female"[MeSH] OR "Menopause"[MeSH])'},
+  {id:'ob',name:['Акушерство','Obstetrics'],q:'("Pregnancy Complications"[MeSH] OR "Labor, Obstetric"[MeSH] OR "Prenatal Care"[MeSH])'},
+  {id:'gyn',name:['Гинекология','Gynecology'],q:'("Genital Diseases, Female"[MeSH] NOT "Genital Neoplasms, Female"[MeSH])'},
+  {id:'onc',name:['Онкогинекология','Gyn oncology'],q:'"Genital Neoplasms, Female"[MeSH]'},
+  {id:'rep',name:['Контрацепция и репродукция','Contraception & fertility'],q:'("Contraception"[MeSH] OR "Infertility, Female"[MeSH] OR "Reproductive Techniques, Assisted"[MeSH])'},
+  {id:'meno',name:['Менопауза','Menopause'],q:'("Menopause"[MeSH] OR "Hormone Replacement Therapy"[MeSH])'}
+];
+const TYPE_RU={'Randomized Controlled Trial':'РКИ','Meta-Analysis':'Метаанализ','Systematic Review':'Систематический обзор','Practice Guideline':'Рекомендации','Guideline':'Рекомендации'};
+const TYPE_EN={'Randomized Controlled Trial':'RCT','Meta-Analysis':'Meta-analysis','Systematic Review':'Systematic review','Practice Guideline':'Guideline','Guideline':'Guideline'};
+let topic='all';
+const cache={};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const term=tp=>`${tp.q} AND ${JQ} AND ${TYPES} AND humans[MeSH]`;
+const pubmedUrl=tp=>'https://pubmed.ncbi.nlm.nih.gov/?sort=pubdate&filter=dates.180d&term='+encodeURIComponent(term(tp));
+
+async function load(tp){
+  const key='lit-'+tp.id, now=Date.now();
+  if(cache[tp.id]) return cache[tp.id];
+  try{const c=JSON.parse(localStorage.getItem(key)||'null');if(c&&now-c.t<6*36e5){cache[tp.id]=c.d;return c.d}}catch(e){}
+  const s=await fetch(EU+'esearch.fcgi?db=pubmed&retmode=json&retmax=12&sort=pub_date&datetype=pdat&reldate=180&tool=obgyntools&term='+encodeURIComponent(term(tp))).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()});
+  const ids=s.esearchresult.idlist;
+  let d=[];
+  if(ids.length){
+    const j=await fetch(EU+'esummary.fcgi?db=pubmed&retmode=json&tool=obgyntools&id='+ids.join(',')).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()});
+    d=ids.map(id=>j.result[id]).filter(Boolean).map(r=>({pmid:r.uid,title:r.title,au:(r.authors&&r.authors[0]?r.authors[0].name:'')+(r.authors&&r.authors.length>1?' et al.':''),src:r.source,date:r.pubdate,types:(r.pubtype||[]).filter(x=>TYPE_EN[x])}));
+  }
+  cache[tp.id]=d;
+  try{localStorage.setItem(key,JSON.stringify({t:now,d}))}catch(e){}
+  return d;
+}
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=TOPICS.map(tp=>`<button type="button" data-t="${tp.id}" aria-pressed="${tp.id===topic}">${t(tp.name)}</button>`).join('');
+}
+async function renderFeed(){
+  const tp=TOPICS.find(x=>x.id===topic), feed=document.getElementById('feed'), note=document.getElementById('feedNote');
+  const link=`<a href="${pubmedUrl(tp)}" target="_blank" rel="noopener">${t(['Открыть этот запрос в PubMed','Open this search in PubMed'])}</a>`;
+  if(!cache[topic]) feed.innerHTML='<li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li>';
+  try{
+    const d=await load(tp);
+    if(topic!==tp.id) return;
+    feed.innerHTML=d.length?d.map(p=>`<li class="paper">${[...new Set(p.types.map(x=>t([TYPE_RU[x],TYPE_EN[x]])))].map(x=>`<span class="tag">${x}</span>`).join('')}
+      <div style="margin-top:4px"><a class="t" href="https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/" target="_blank" rel="noopener">${esc(p.title)}</a></div>
+      <div class="m">${esc(p.au)} · <i>${esc(p.src)}</i> · ${esc(p.date)} · PMID ${p.pmid}</div></li>`).join('')
+      :`<li class="paper">${t(['За последние 180 дней ничего не найдено.','Nothing found in the last 180 days.'])}</li>`;
+    note.innerHTML=t(['Лента обновляется автоматически. ','Updated automatically. '])+link;
+  }catch(e){
+    feed.innerHTML=`<li class="paper">${t(['Не удалось загрузить ленту из PubMed. Откройте свежие статьи напрямую:','Could not load the PubMed feed. Open the latest papers directly:'])} ${link}</li>`;
+    note.textContent='';
+  }
+}
+
+const PM=id=>'https://pubmed.ncbi.nlm.nih.gov/'+id+'/';
+const SR=q=>'https://pubmed.ncbi.nlm.nih.gov/?term='+encodeURIComponent(q);
+const LANDMARKS=[
+ {g:['Акушерство','Obstetrics'],items:[
+  {t:'Aspirin versus Placebo in Pregnancies at High Risk for Preterm Preeclampsia (ASPRE)',m:'Rolnik · N Engl J Med · 2017',u:PM(28657417),w:['Аспирин 150 мг на ночь с 11–14 до 36 недель у женщин высокого риска снизил преэклампсию до 37 недель с 4,3% до 1,6%. Основа скрининга I триместра и профилактики аспирином.','Aspirin 150 mg nightly from 11–14 to 36 weeks in high-risk women cut preterm preeclampsia from 4.3% to 1.6%. The basis of first-trimester screening and aspirin prophylaxis.']},
+  {t:'Do women with pre-eclampsia, and their babies, benefit from magnesium sulphate? (Magpie Trial)',m:'Magpie Trial Collaborative Group · Lancet · 2002',u:SR('Magpie Trial magnesium sulphate pre-eclampsia Lancet 2002'),w:['Сульфат магния примерно вдвое снизил риск эклампсии при преэклампсии. Закрепил магнезию как стандарт во всём мире.','Magnesium sulphate roughly halved the risk of eclampsia in pre-eclampsia, making it the global standard.']},
+  {t:'Treatment for Mild Chronic Hypertension during Pregnancy (CHAP)',m:'Tita · N Engl J Med · 2022',u:SR('Tita[au] chronic hypertension pregnancy CHAP 2022'),w:['Лечение хронической АГ с порога 140/90 улучшило исходы без ухудшения роста плода. Изменило целевые уровни АД при беременности.','Treating chronic hypertension from 140/90 improved outcomes without impairing fetal growth, changing BP targets in pregnancy.']},
+  {t:'Labor Induction versus Expectant Management in Low-Risk Nulliparous Women (ARRIVE)',m:'Grobman · N Engl J Med · 2018',u:PM(30089070),w:['Индукция в 39 недель у первородящих низкого риска не ухудшила перинатальные исходы и снизила частоту кесарева сечения.','Induction at 39 weeks in low-risk nulliparas did not worsen perinatal outcomes and lowered the caesarean rate.']},
+  {t:'Antenatal Betamethasone for Women at Risk for Late Preterm Delivery (ALPS)',m:'Gyamfi-Bannerman · N Engl J Med · 2016',u:SR('Gyamfi-Bannerman antenatal betamethasone late preterm delivery 2016'),w:['Бетаметазон в 34–36 недель снизил респираторные осложнения у новорождённых. Расширил показания к антенатальным стероидам.','Betamethasone at 34–36 weeks reduced neonatal respiratory morbidity, extending antenatal steroid use.']},
+  {t:'Hyperglycemia and Adverse Pregnancy Outcomes (HAPO)',m:'Metzger · N Engl J Med · 2008',u:PM(18463375),w:['Связь гликемии матери с исходами оказалась непрерывной, без явного порога. На этих данных построены критерии IADPSG для диагностики ГСД.','The link between maternal glucose and outcomes was continuous, without a clear threshold — the basis of IADPSG criteria for gestational diabetes.']},
+  {t:'Planned caesarean section versus planned vaginal birth for breech presentation at term (Term Breech Trial)',m:'Hannah · Lancet · 2000',u:PM(11052579),w:['Плановое кесарево при тазовом предлежании снизило ранние перинатальные осложнения и резко изменило практику во всём мире. Позже выводы обсуждались и уточнялись.','Planned caesarean for breech reduced early perinatal morbidity and changed practice worldwide; its conclusions were later debated and refined.']}
+ ]},
+ {g:['Безопасность: кровотечения','Safety: haemorrhage'],note:['Послеродовое кровотечение и гипертензивные расстройства — ведущие причины предотвратимой материнской смертности.','Postpartum haemorrhage and hypertensive disorders are leading causes of preventable maternal death.'],items:[
+  {t:'Randomized Trial of Early Detection and Treatment of Postpartum Hemorrhage (E-MOTIVE)',m:'Gallos · N Engl J Med · 2023',u:SR('Gallos E-MOTIVE early detection treatment postpartum hemorrhage 2023'),w:['Объективное измерение кровопотери с помощью мерного дрейпа и пакет мер первой линии значительно снизили тяжёлые исходы ПРК. Главный урок — кровопотерю недооценивают на глаз.','Objective blood-loss measurement with a calibrated drape plus a first-response bundle markedly reduced severe PPH outcomes. Key lesson: blood loss is underestimated by eye.']},
+  {t:'Effect of early tranexamic acid administration in women with post-partum haemorrhage (WOMAN)',m:'WOMAN Trial Collaborators · Lancet · 2017',u:PM(28456509),w:['Транексамовая кислота в первые 3 часа снизила смертность от кровотечения. Вошла в рекомендации ВОЗ по ПРК.','Tranexamic acid within 3 hours reduced death from bleeding and entered WHO PPH guidance.']}
+ ]},
+ {g:['Онкогинекология и скрининг','Gyn oncology and screening'],items:[
+  {t:'Minimally Invasive versus Abdominal Radical Hysterectomy for Cervical Cancer (LACC)',m:'Ramirez · N Engl J Med · 2018',u:SR('Ramirez minimally invasive versus abdominal radical hysterectomy cervical cancer 2018'),w:['Лапароскопическая радикальная гистерэктомия при раке шейки матки дала худшую выживаемость, чем открытая. Практика во многих странах вернулась к открытому доступу.','Minimally invasive radical hysterectomy for cervical cancer had worse survival than open surgery; many centres returned to the open approach.']},
+  {t:'HPV Vaccination and the Risk of Invasive Cervical Cancer',m:'Lei · N Engl J Med · 2020',u:PM(32997908),w:['Вакцинация до 17 лет снизила риск инвазивного рака шейки матки почти на 90% по данным популяционного регистра Швеции.','Vaccination before age 17 reduced invasive cervical cancer by nearly 90% in Swedish population data.']}
+ ]},
+ {g:['Менопауза и контрацепция','Menopause and contraception'],items:[
+  {t:"Risks and benefits of estrogen plus progestin in healthy postmenopausal women (WHI)",m:'Rossouw · JAMA · 2002',u:PM(12117397),w:['Досрочная остановка ветви эстроген + прогестин из-за роста РМЖ, ИБС, инсульта и ВТЭ. Назначения МГТ в мире резко упали.','Early stop of the estrogen-plus-progestin arm for breast cancer, CHD, stroke and VTE; HT prescribing fell sharply worldwide.']},
+  {t:'Menopausal Hormone Therapy and Long-term All-Cause and Cause-Specific Mortality',m:'Manson · JAMA · 2017',u:PM(28898378),w:['18 лет наблюдения WHI: МГТ не повысила общую смертность. Вместе с анализом по возрасту это вернуло МГТ для симптомных женщин до 60 лет.','18-year WHI follow-up: HT did not increase all-cause mortality — with age analyses, this restored HT for symptomatic women under 60.']},
+  {t:'Contemporary Hormonal Contraception and the Risk of Breast Cancer',m:'Mørch · N Engl J Med · 2017',u:PM(29211679),w:['Современные гормональные контрацептивы немного повышают риск РМЖ (около 1 дополнительного случая на 7 700 женщин в год). Важно для консультирования.','Contemporary hormonal contraception slightly raises breast cancer risk (about 1 extra case per 7,700 women per year) — key for counselling.']}
+ ]}
+];
+function renderLandmarks(){
+  document.getElementById('landmarks').innerHTML=LANDMARKS.map(g=>`<div class="grp">${t(g.g)}</div>${g.note?`<p class="note" style="margin:-2px 0 8px">${t(g.note)}</p>`:''}<ul class="papers">`+
+    g.items.map(p=>`<li class="paper"><a class="t" href="${p.u}" target="_blank" rel="noopener">${esc(p.t)}</a><div class="m">${esc(p.m)}</div><div class="why">${t(p.w)}</div></li>`).join('')+`</ul>`).join('');
+}
+document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;topic=b.dataset.t;renderTabs();renderFeed()});
+window.onLang=()=>{renderTabs();renderFeed();renderLandmarks()};
+renderTabs();renderFeed();renderLandmarks();
+</script>
+</body>
+</html>
