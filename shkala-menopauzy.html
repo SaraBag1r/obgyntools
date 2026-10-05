@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тест на климакс: шкала менопаузальных симптомов MRS онлайн · OBGYN Tools</title>
+<meta name="description" content="Пройдите тест по шкале менопаузальных симптомов MRS: 11 вопросов о приливах, сне, настроении и интимном здоровье. Узнайте, насколько выражены симптомы, и покажите результат врачу.">
+<link rel="canonical" href="https://obgyntools.online/shkala-menopauzy.html">
+<meta property="og:title" content="Тест на климакс: шкала менопаузальных симптомов">
+<meta property="og:description" content="11 вопросов — и вы знаете, насколько выражены симптомы. От врача акушера-гинеколога.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="pacientkam.html">Для пациенток</a>
+      <a href="kalkulyator-beremennosti.html">Беременность</a>
+      <a href="propustila-tabletku.html">Пропуск таблетки</a>
+      <a href="rasshifrovka-citologii.html">Цитология</a>
+      <a href="shkala-menopauzy.html" aria-current="page">Менопауза</a>
+    </nav>
+  </header>
+  <div class="pagehead">
+    <h1>Тест на климакс: шкала менопаузальных симптомов</h1>
+    <p>11 вопросов по международной шкале MRS (Menopause Rating Scale). Отметьте, насколько каждый симптом беспокоит вас <b>сейчас</b>. Результат можно скопировать и показать врачу.</p>
+  </div>
+
+  <div class="pt-layout">
+    <div class="form mrs" id="form"></div>
+    <aside class="results" id="res" aria-live="polite"></aside>
+  </div>
+
+  <article class="article">
+    <h2>Что такое менопауза и климакс</h2>
+    <p><b>Менопауза</b> — последняя менструация в жизни; о ней говорят, когда менструаций нет 12 месяцев. В среднем она наступает в 50–51 год. <b>Климакс</b> (перименопауза) — несколько лет до и после неё, когда уровень эстрогенов колеблется и снижается. Именно в это время появляются приливы, нарушения сна, перепады настроения.</p>
+    <h2>Что помогает</h2>
+    <p>Выраженные симптомы — не то, что нужно «просто перетерпеть». Современная менопаузальная гормональная терапия у здоровых женщин до 60 лет обычно приносит больше пользы, чем риска. Тем, кому гормоны не подходят, есть негормональные лекарства и немедикаментозные методы. Выбор зависит от ваших симптомов и здоровья — обсудите его с гинекологом.</p>
+    <h2>Когда к врачу без промедления</h2>
+    <ul>
+      <li>Кровянистые выделения после того, как менструаций не было 12 месяцев</li>
+      <li>Очень обильные или частые кровотечения в перименопаузе</li>
+      <li>Мысли о том, что жить не хочется, — обратитесь за помощью сразу</li>
+    </ul>
+    <p class="note" style="margin-top:24px">Шкала MRS: Heinemann K. et al., Health and Quality of Life Outcomes, 2004. Перевод вопросов адаптирован. Тест помогает оценить симптомы, но не ставит диагноз.</p>
+  </article>
+
+  <footer class="site-foot">
+    <div>Составлено врачом акушером-гинекологом. <a href="pacientkam.html">Другие инструменты для пациенток</a> · <a href="about.html">Источники и конфиденциальность</a></div>
+    <div>© 2026 obgyntools</div>
+  </footer>
+</div>
+
+<script>
+const Q=[
+  ['Приливы, потливость','волны жара, ночная потливость'],
+  ['Неприятные ощущения в сердце','сердцебиение, перебои, чувство сдавления'],
+  ['Нарушения сна','трудно уснуть, просыпаетесь среди ночи или слишком рано'],
+  ['Подавленное настроение','грусть, плаксивость, нет желания что-то делать'],
+  ['Раздражительность','нервозность, вспыльчивость'],
+  ['Тревожность','внутреннее беспокойство, паника'],
+  ['Усталость','снижение работоспособности, памяти, концентрации'],
+  ['Сексуальные проблемы','снижение влечения, активности, удовлетворения'],
+  ['Проблемы с мочевым пузырём','частые позывы, подтекание мочи'],
+  ['Сухость влагалища','жжение, дискомфорт или боль при сексе'],
+  ['Боли в суставах и мышцах','ломота, скованность']
+];
+const LBL=['Нет','Слабо','Умеренно','Сильно','Очень сильно'];
+const SUB=[
+  {name:'Телесные',idx:[0,1,2,10],max:16,cut:[2,4,8]},
+  {name:'Эмоциональные',idx:[3,4,5,6],max:16,cut:[1,3,6]},
+  {name:'Урогенитальные',idx:[7,8,9],max:12,cut:[0,1,3]}
+];
+const SEV=['нет или минимальные','лёгкие','умеренные','выраженные'];
+const sev=(v,c)=>v<=c[0]?0:v<=c[1]?1:v<=c[2]?2:3;
+const ans=Array(11).fill(0);
+
+document.getElementById('form').innerHTML=Q.map((q,i)=>`<div class="q" role="radiogroup" aria-label="${q[0]}"><p>${i+1}. ${q[0]}<small>${q[1]}</small></p><div class="scale">${LBL.map((l,v)=>`<label><input type="radio" name="q${i}" value="${v}" ${v===0?'checked':''}><span>${l}</span></label>`).join('')}</div></div>`).join('');
+
+function render(){
+  Q.forEach((_,i)=>{ans[i]=parseInt(document.querySelector(`input[name=q${i}]:checked`).value)});
+  const total=ans.reduce((a,b)=>a+b,0);
+  const ts=sev(total,[4,8,16]);
+  const cls=['p1','p2','p3','p4'][ts];
+  const subs=SUB.map(s=>{const v=s.idx.reduce((a,i)=>a+ans[i],0);return {...s,v,s:sev(v,s.cut)}});
+  const advice=[
+    'Симптомы почти не беспокоят. Плановый осмотр у гинеколога — раз в год.',
+    'Симптомы лёгкие. Помогут сон, движение, отказ от курения. Расскажите о них врачу на плановом приёме.',
+    'Симптомы заметно влияют на жизнь. Стоит обсудить с гинекологом, какое лечение вам подойдёт.',
+    'Симптомы выраженные. Запишитесь к гинекологу: сейчас есть эффективные гормональные и негормональные способы помочь.'
+  ][ts];
+  let h=`<div class="block"><h4>Ваш результат</h4>
+    <div class="big">${total} <span style="font-size:18px;color:var(--muted)">из 44</span></div>
+    <span class="pill ${cls}">Симптомы: ${SEV[ts]}</span>
+    <p style="margin-top:10px">${advice}</p></div>
+    <div class="block"><h4>По группам симптомов</h4><div style="display:grid;gap:10px">`+
+    subs.map(s=>`<div class="sub"><span>${s.name}</span><span class="track"><i style="width:${s.v/s.max*100}%"></i></span><b>${s.v}/${s.max}</b></div><small class="note" style="margin-top:-6px">${SEV[s.s]}</small>`).join('')+
+    `</div></div>
+    <button class="ghost" id="copy" type="button">Скопировать результат для врача</button>
+    <p class="note" id="copied" aria-live="polite"></p>
+    <p class="note">Тест помогает оценить симптомы, но не ставит диагноз.</p>`;
+  document.getElementById('res').innerHTML=h;
+  document.getElementById('copy').onclick=()=>{
+    const d=new Date().toLocaleDateString('ru-RU');
+    const txt=`Шкала менопаузальных симптомов MRS, ${d}\nИтого: ${total}/44 (${SEV[ts]})\n`+subs.map(s=>`${s.name}: ${s.v}/${s.max} (${SEV[s.s]})`).join('\n')+'\n\n'+Q.map((q,i)=>`${i+1}. ${q[0]}: ${LBL[ans[i]].toLowerCase()}`).join('\n');
+    const done=()=>{document.getElementById('copied').textContent='Скопировано — вставьте в сообщение или заметку.'};
+    if(navigator.clipboard) navigator.clipboard.writeText(txt).then(done).catch(()=>{prompt('Скопируйте текст:',txt)});
+  };
+}
+document.getElementById('form').addEventListener('change',render);
+render();
+</script>
+</body>
+</html>

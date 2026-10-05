@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Пропустила противозачаточную таблетку: что делать · OBGYN Tools</title>
+<meta name="description" content="Пошаговый ответ, что делать, если пропустили противозачаточную таблетку: КОК или мини-пили, сколько дней нужен презерватив и когда нужна экстренная контрацепция. По рекомендациям ВОЗ и CDC.">
+<link rel="canonical" href="https://obgyntools.online/propustila-tabletku.html">
+<meta property="og:title" content="Пропустила таблетку: что делать">
+<meta property="og:description" content="Пошаговый ответ по рекомендациям ВОЗ — от врача акушера-гинеколога.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="pacientkam.html">Для пациенток</a>
+      <a href="kalkulyator-beremennosti.html">Беременность</a>
+      <a href="propustila-tabletku.html" aria-current="page">Пропуск таблетки</a>
+      <a href="rasshifrovka-citologii.html">Цитология</a>
+      <a href="shkala-menopauzy.html">Менопауза</a>
+    </nav>
+  </header>
+  <div class="pagehead">
+    <h1>Пропустила противозачаточную таблетку: что делать</h1>
+    <p>Ответьте на 3 вопроса — получите пошаговый план по рекомендациям ВОЗ и CDC. Название препарата и тип (КОК или мини-пили) указаны в инструкции.</p>
+  </div>
+
+  <div class="pt-layout">
+    <div class="form">
+      <fieldset>
+        <legend>1. Какие таблетки</legend>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="type" value="coc" checked><span>Комбинированные (КОК)</span></label>
+          <label><input type="radio" name="type" value="des"><span>Мини-пили с дезогестрелом</span></label>
+          <label><input type="radio" name="type" value="pop"><span>Другие мини-пили</span></label>
+        </div>
+        <p class="note" style="margin-top:8px">КОК содержат эстроген и прогестаген (в инструкции — «этинилэстрадиол» или «эстрадиол»). Мини-пили — только прогестаген; чаще всего это дезогестрел 75 мкг, их пьют без перерыва.</p>
+      </fieldset>
+
+      <fieldset id="cocBox">
+        <legend>2. Что пропущено</legend>
+        <div class="seg-title">Сколько таблеток подряд</div>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="n" value="1" checked><span>Одна (опоздание меньше 48 часов)</span></label>
+          <label><input type="radio" name="n" value="2"><span>Две и больше (48 часов и больше)</span></label>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <label class="field" for="pos">Номер пропущенной таблетки в упаковке<input type="number" id="pos" min="1" max="28" value="9" style="width:110px"></label>
+          <label class="field" for="pack">Схема упаковки<select id="pack"><option value="21">21 таблетка + перерыв 7 дней</option><option value="21p">21 активная + 7 пустышек</option><option value="24">24 активные + 4 пустышки</option></select></label>
+        </div>
+      </fieldset>
+
+      <fieldset id="popBox" hidden>
+        <legend>2. Насколько опоздала</legend>
+        <div class="seg" role="radiogroup" id="popLate"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Секс</legend>
+        <div class="checks">
+          <label class="chk"><input type="checkbox" id="sex"><span>Был секс без презерватива за последние 5 дней<small>или после пропуска</small></span></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <aside class="results" id="res" aria-live="polite"></aside>
+  </div>
+
+  <article class="article">
+    <h2>Когда пропуск таблетки опасен</h2>
+    <p>Самые рискованные пропуски у КОК — <b>в начале и в конце упаковки</b>, рядом с перерывом. Перерыв и так даёт яичникам «отдохнуть» от гормонов 7 дней. Если перерыв удлиняется за счёт пропусков, может произойти овуляция.</p>
+    <p>Мини-пили чувствительнее к опозданиям: у дезогестрела «окно» 12 часов, у других мини-пили — всего 3 часа.</p>
+
+    <h2>Рвота и диарея</h2>
+    <p>Если рвота была в течение 3 часов после приёма таблетки, она могла не всосаться. Примите ещё одну таблетку как можно скорее. Если рвота или сильная диарея продолжаются больше суток, считайте эти дни пропущенными и действуйте по правилам выше.</p>
+
+    <h2>Экстренная контрацепция</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Метод</th><th>До какого срока</th><th>Комментарий</th></tr></thead>
+      <tbody>
+        <tr><td>Медная внутриматочная спираль</td><td>До 5 дней</td><td>Самый эффективный метод; ставит врач</td></tr>
+        <tr><td>Таблетка с улипристалом 30 мг</td><td>До 5 дней (120 ч)</td><td>Регулярные таблетки возобновляют через 5 дней, затем 7 дней с презервативом</td></tr>
+        <tr><td>Таблетка с левоноргестрелом 1,5 мг</td><td>До 3 дней (72 ч)</td><td>Чем раньше, тем эффективнее; регулярные таблетки продолжают сразу</td></tr>
+      </tbody>
+    </table></div>
+    <p>Если очередное кровотечение задерживается больше чем на неделю, сделайте тест на беременность.</p>
+
+    <h2>Кольцо и пластырь</h2>
+    <p>Для вагинального кольца и пластыря правила другие — смотрите инструкцию или спросите врача.</p>
+
+    <p class="note" style="margin-top:24px">По материалам: WHO Selected Practice Recommendations for Contraceptive Use; CDC U.S. Selected Practice Recommendations for Contraceptive Use, 2024. Страница носит информационный характер и не заменяет консультацию врача. Если сомневаетесь — используйте презерватив и обратитесь к гинекологу.</p>
+  </article>
+
+  <footer class="site-foot">
+    <div>Составлено врачом акушером-гинекологом. <a href="pacientkam.html">Другие инструменты для пациенток</a> · <a href="about.html">Источники и конфиденциальность</a></div>
+    <div>© 2026 obgyntools</div>
+  </footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const val=n=>document.querySelector(`input[name="${n}"]:checked`)?.value;
+const EC=`<div class="block"><h4>Экстренная контрацепция</h4><ul>
+  <li>Медная спираль — до 5 дней, самая эффективная</li>
+  <li>Улипристал 30 мг — до 120 часов</li>
+  <li>Левоноргестрел 1,5 мг — до 72 часов</li></ul>
+  <p class="note" style="margin-top:6px">Чем раньше, тем лучше. Подробнее — в таблице ниже.</p></div>`;
+
+function renderPopLate(){
+  const t=val('type'), win=t==='des'?12:3;
+  $('popLate').innerHTML=`<label><input type="radio" name="late" value="ok" checked><span>Меньше ${win} часов</span></label><label><input type="radio" name="late" value="miss"><span>${win} часов и больше</span></label>`;
+}
+function plan(){
+  const t=val('type'), sex=$('sex').checked;
+  let level, title, steps=[], ec=false, ecNote='';
+  if(t==='coc'){
+    const n=val('n'), pos=parseInt($('pos').value)||1, pack=$('pack').value;
+    const active=pack==='24'?24:21, hasPlacebo=pack!=='21';
+    if(pos>active){
+      return {level:'p1',label:'Защита не снижена',title:'Это неактивная таблетка',steps:['Выбросьте пропущенную таблетку-пустышку','Продолжайте упаковку как обычно','Дополнительная защита не нужна']};
+    }
+    if(n==='1'){
+      level='p1';title='Защита сохраняется';
+      steps=['Примите пропущенную таблетку сейчас','Следующую — в обычное время, даже если получится две в один день','Остальные таблетки — по графику','Презерватив не нужен'];
+      if(pos<=7&&sex){ecNote='Экстренная контрацепция обычно не нужна. Но если вы пропускали таблетки в конце прошлой упаковки или удлинили перерыв, обсудите её с врачом.'}
+    } else {
+      level='p3';title='Защита снижена: нужен презерватив 7 дней';
+      steps=['Примите последнюю из пропущенных таблеток сейчас','Остальные пропущенные выбросьте','Дальше — по одной в обычное время, даже если сегодня получится две',`Презерватив или воздержание, пока не выпьете <b>7 активных таблеток подряд</b>`];
+      if(pos>active-7){
+        steps.push(hasPlacebo?`Допейте активные таблетки и <b>не пейте пустышки</b> — сразу начните новую упаковку`:`Допейте упаковку и <b>не делайте перерыв</b> — сразу начните новую`);
+      }
+      if(pos<=7){
+        if(sex){level='p4';title='Нужна экстренная контрацепция';ec=true;steps.push('Был секс без защиты в последние 5 дней — рассмотрите экстренную контрацепцию как можно скорее')}
+        else ecNote='Если секс без защиты случится до того, как вы выпьете 7 таблеток подряд, понадобится экстренная контрацепция.';
+      }
+    }
+  } else {
+    const late=val('late'), win=t==='des'?12:3;
+    if(late==='ok'){
+      level='p1';title='Защита сохраняется';
+      steps=['Примите таблетку сейчас','Следующую — в обычное время','Презерватив не нужен'];
+    } else {
+      level='p3';title='Защита снижена: нужен презерватив 2 дня';
+      steps=['Примите одну таблетку сейчас (даже если пропустили несколько — только одну)','Следующую — в обычное время, даже если сегодня получится две',`Презерватив или воздержание <b>2 дня</b> (48 часов) после того, как возобновили приём`];
+      if(sex){level='p4';title='Нужна экстренная контрацепция';ec=true;steps.push('Был секс без защиты после пропуска — рассмотрите экстренную контрацепцию как можно скорее')}
+    }
+  }
+  return {level,title,steps,ec,ecNote};
+}
+function render(){
+  const t=val('type');
+  $('cocBox').hidden=t!=='coc'; $('popBox').hidden=t==='coc';
+  const p=plan();
+  const lbl={p1:'Не страшно',p3:'Нужна осторожность',p4:'Действуйте сегодня'}[p.level]||'';
+  let h=`<div class="block"><span class="pill ${p.level}">${p.label||lbl}</span>
+    <h2 class="big" style="font-size:26px;margin-top:10px">${p.title}</h2>
+    <h4 style="margin-top:12px">Что сделать</h4><ol class="steps">${p.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>`;
+  if(p.ecNote) h+=`<div class="block"><p>${p.ecNote}</p></div>`;
+  if(p.ec) h+=EC;
+  h+=`<p class="note">Информационный ответ по рекомендациям ВОЗ и CDC. Если сомневаетесь — используйте презерватив и обратитесь к гинекологу.</p>`;
+  $('res').innerHTML=h;
+}
+document.querySelectorAll('input[name=type]').forEach(r=>r.addEventListener('change',()=>{renderPopLate();render()}));
+document.querySelector('.form').addEventListener('input',render);
+document.querySelector('.form').addEventListener('change',render);
+renderPopLate();render();
+</script>
+</body>
+</html>

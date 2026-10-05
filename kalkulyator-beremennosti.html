@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Калькулятор беременности: срок и дата родов онлайн · OBGYN Tools</title>
+<meta name="description" content="Рассчитайте срок беременности по неделям и дату родов по последней менструации, дате зачатия, ЭКО или УЗИ. Личный календарь скринингов, анализов и декрета. Составлено врачом акушером-гинекологом.">
+<link rel="canonical" href="https://obgyntools.online/kalkulyator-beremennosti.html">
+<meta property="og:title" content="Калькулятор беременности: срок и дата родов">
+<meta property="og:description" content="Срок по неделям, дата родов и календарь обследований — от врача акушера-гинеколога.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Как считается срок беременности?","acceptedAnswer":{"@type":"Answer","text":"Врачи считают акушерский срок — от первого дня последней менструации. Он примерно на 2 недели больше, чем срок от зачатия. Беременность в среднем длится 40 акушерских недель (280 дней)."}},
+{"@type":"Question","name":"Насколько точна предполагаемая дата родов?","acceptedAnswer":{"@type":"Answer","text":"Точно в предполагаемую дату рождается около 4–5% детей. Нормальными считаются роды с 37 до 42 недель. Самый точный срок даёт УЗИ в первом триместре."}},
+{"@type":"Question","name":"Что делать, если цикл длиннее 28 дней?","acceptedAnswer":{"@type":"Answer","text":"Укажите свою длину цикла — калькулятор сдвинет дату родов. При длинном или нерегулярном цикле срок уточняют по УЗИ."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="pacientkam.html">Для пациенток</a>
+      <a href="kalkulyator-beremennosti.html" aria-current="page">Беременность</a>
+      <a href="propustila-tabletku.html">Пропуск таблетки</a>
+      <a href="rasshifrovka-citologii.html">Цитология</a>
+      <a href="shkala-menopauzy.html">Менопауза</a>
+    </nav>
+  </header>
+  <div class="pagehead">
+    <h1>Калькулятор беременности</h1>
+    <p>Срок по неделям, предполагаемая дата родов и личный календарь: когда скрининги, анализы и декрет. Расчёт идёт в вашем браузере, данные никуда не отправляются.</p>
+  </div>
+
+  <div class="pt-layout">
+    <div class="form">
+      <fieldset>
+        <legend>Как считать</legend>
+        <div class="seg" role="radiogroup" aria-label="Способ расчёта">
+          <label><input type="radio" name="m" value="lmp" checked><span>По последней менструации</span></label>
+          <label><input type="radio" name="m" value="conc"><span>По дате зачатия</span></label>
+          <label><input type="radio" name="m" value="ivf"><span>После ЭКО</span></label>
+          <label><input type="radio" name="m" value="us"><span>По УЗИ</span></label>
+        </div>
+        <div class="row" style="margin-top:14px" id="inputs"></div>
+        <p class="note" id="hint" style="margin-top:12px"></p>
+      </fieldset>
+      <fieldset>
+        <legend>Дополнительно</legend>
+        <div class="checks">
+          <label class="chk"><input type="checkbox" id="rh"><span>У меня отрицательный резус-фактор</span></label>
+          <label class="chk"><input type="checkbox" id="twins"><span>Двойня</span></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <aside class="results" id="res" aria-live="polite"></aside>
+  </div>
+
+  <article class="article">
+    <h2>Как считается срок беременности</h2>
+    <p>Врачи считают <b>акушерский срок</b> — от первого дня последней менструации, а не от зачатия. Поэтому акушерский срок примерно на 2 недели больше «реального» возраста малыша. В среднем беременность длится 40 акушерских недель, или 280 дней.</p>
+    <p>Предполагаемая дата родов по последней менструации считается по правилу Негеле: к первому дню менструации прибавляют 280 дней. Если цикл длиннее или короче 28 дней, дата сдвигается на разницу. Калькулятор делает это автоматически.</p>
+
+    <h3>Какой способ точнее</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Способ</th><th>Когда подходит</th></tr></thead>
+      <tbody>
+        <tr><td>УЗИ в 11–14 недель</td><td>Самый точный. Если срок по УЗИ отличается от срока по менструации больше чем на 5–7 дней, врач обычно ориентируется на УЗИ.</td></tr>
+        <tr><td>Дата переноса при ЭКО</td><td>Точный: возраст эмбриона известен до дня.</td></tr>
+        <tr><td>Последняя менструация</td><td>Хорош при регулярном цикле и если вы точно помните дату.</td></tr>
+        <tr><td>Дата зачатия</td><td>Подходит, если известна дата овуляции. Сперматозоиды живут до 5 дней, поэтому «день секса» не всегда равен дню зачатия.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>Триместры беременности</h2>
+    <ul>
+      <li><b>Первый триместр</b> — до 13 недель 6 дней. Закладка органов, постановка на учёт, первый скрининг.</li>
+      <li><b>Второй триместр</b> — с 14 до 27 недель 6 дней. Второе скрининговое УЗИ, глюкозотолерантный тест.</li>
+      <li><b>Третий триместр</b> — с 28 недель до родов. Декрет, третье УЗИ, подготовка к родам.</li>
+    </ul>
+
+    <h2>Частые вопросы</h2>
+    <h3>Насколько точна предполагаемая дата родов?</h3>
+    <p>Точно в этот день рождается лишь около 4–5% детей. Нормальными считаются роды с 37 до 42 недель. Дата нужна, чтобы планировать обследования и вовремя заметить перенашивание.</p>
+    <h3>Когда вставать на учёт?</h3>
+    <p>Оптимально — до 12 недель. Это даёт время сдать анализы и пройти первый скрининг в 11–14 недель.</p>
+    <h3>Когда уходить в декрет?</h3>
+    <p>В России больничный по беременности и родам открывают в 30 недель (при многоплодной беременности — в 28 недель) на 140 дней, при двойне — на 194 дня.</p>
+
+    <p class="note" style="margin-top:24px">Сроки обследований приведены по порядку оказания помощи по профилю «акушерство и гинекология» (приказ Минздрава России № 1130н) и клиническим рекомендациям «Нормальная беременность». Ваш врач может назначить другой план. Калькулятор носит информационный характер и не заменяет консультацию.</p>
+  </article>
+
+  <footer class="site-foot">
+    <div>Составлено врачом акушером-гинекологом. <a href="pacientkam.html">Другие инструменты для пациенток</a> · <a href="about.html">Источники и конфиденциальность</a></div>
+    <div>© 2026 obgyntools</div>
+  </footer>
+</div>
+
+<script>
+const DAY=864e5;
+const MONTHS=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const WD=['вс','пн','вт','ср','чт','пт','сб'];
+const today=()=>{const d=new Date();return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())};
+const parse=s=>{if(!s)return null;const [y,m,d]=s.split('-').map(Number);return Date.UTC(y,m-1,d)};
+const iso=t=>new Date(t).toISOString().slice(0,10);
+const fmt=t=>{const d=new Date(t);return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`};
+const fmtShort=t=>{const d=new Date(t);return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`};
+const plural=(n,a,b,c)=>{n=Math.abs(n)%100;const n1=n%10;if(n>10&&n<20)return c;if(n1>1&&n1<5)return b;if(n1===1)return a;return c};
+const wk=n=>`${n} ${plural(n,'неделя','недели','недель')}`;
+const dy=n=>`${n} ${plural(n,'день','дня','дней')}`;
+
+let method='lmp';
+const st={lmp:iso(today()-70*DAY),cycle:28,conc:'',ivf:'',ivfDay:'5',us:'',usW:'',usD:'0'};
+
+function renderInputs(){
+  const box=document.getElementById('inputs'),hint=document.getElementById('hint');
+  if(method==='lmp'){
+    box.innerHTML=`<label class="field" for="lmp">Первый день последней менструации<input type="date" id="lmp" value="${st.lmp}" max="${iso(today())}"></label>
+    <label class="field" for="cycle">Длина цикла, дней<input type="number" id="cycle" min="20" max="45" value="${st.cycle}" style="width:110px"></label>`;
+    hint.textContent='Для примера стоит дата 10 недель назад — замените её на свою.';
+  } else if(method==='conc'){
+    box.innerHTML=`<label class="field" for="conc">Дата зачатия или овуляции<input type="date" id="conc" value="${st.conc}" max="${iso(today())}"></label>`;
+    hint.textContent='Если знаете день овуляции по тестам или УЗИ — укажите его.';
+  } else if(method==='ivf'){
+    box.innerHTML=`<label class="field" for="ivf">Дата переноса эмбриона<input type="date" id="ivf" value="${st.ivf}" max="${iso(today())}"></label>
+    <label class="field" for="ivfDay">Возраст эмбриона<select id="ivfDay"><option value="3" ${st.ivfDay==='3'?'selected':''}>3 дня</option><option value="5" ${st.ivfDay==='5'?'selected':''}>5 дней (бластоциста)</option></select></label>`;
+    hint.textContent='Возраст эмбриона указан в выписке из клиники ЭКО.';
+  } else {
+    box.innerHTML=`<label class="field" for="us">Дата УЗИ<input type="date" id="us" value="${st.us}" max="${iso(today())}"></label>
+    <label class="field" for="usW">Срок по УЗИ, недель<input type="number" id="usW" min="4" max="42" value="${st.usW}" style="width:110px"></label>
+    <label class="field" for="usD">и дней<input type="number" id="usD" min="0" max="6" value="${st.usD}" style="width:90px"></label>`;
+    hint.textContent='Возьмите срок из заключения УЗИ, лучше первого триместра.';
+  }
+}
+function readInputs(){
+  document.querySelectorAll('#inputs input,#inputs select').forEach(el=>{st[el.id]=el.value});
+}
+function computeLMP(){
+  // returns equivalent LMP timestamp (EDD-280)
+  if(method==='lmp'){const t=parse(st.lmp);if(t==null)return null;const c=parseInt(st.cycle)||28;return t+(Math.min(45,Math.max(20,c))-28)*DAY}
+  if(method==='conc'){const t=parse(st.conc);return t==null?null:t-14*DAY}
+  if(method==='ivf'){const t=parse(st.ivf);return t==null?null:t-(14+parseInt(st.ivfDay))*DAY}
+  if(method==='us'){const t=parse(st.us),w=parseInt(st.usW),d=parseInt(st.usD)||0;if(t==null||isNaN(w))return null;return t-(w*7+d)*DAY}
+}
+function events(twins,rh){
+  const e=[
+    [5*7,12*7+6,'Постановка на учёт','Оптимально до 12 недель: анализы крови и мочи, мазки, осмотр'],
+    [11*7,13*7+6,'Первый скрининг','УЗИ и анализ крови (PAPP-A, β-ХГЧ) — оценка риска хромосомных отклонений'],
+    [19*7,20*7+6,'Второе скрининговое УЗИ','Подробная оценка анатомии малыша и плаценты'],
+    [24*7,27*7+6,'Глюкозотолерантный тест','Выявляет гестационный сахарный диабет'],
+  ];
+  if(rh) e.push([28*7,28*7+6,'Антирезусный иммуноглобулин','При отрицательном резусе и отсутствии антител — профилактика резус-конфликта']);
+  e.push([twins?28*7:30*7,twins?28*7:30*7,'Декретный отпуск',twins?'Больничный по беременности и родам — 194 дня при двойне':'Больничный по беременности и родам — 140 дней']);
+  e.push([30*7,33*7+6,'Третье УЗИ','Рост малыша, количество вод, допплерометрия']);
+  e.push([35*7,36*7+6,'Мазок на стрептококк группы B','Если он найден, в родах дают антибиотик']);
+  e.push([37*7,37*7,'Доношенная беременность','С 37 недель роды считаются своевременными']);
+  e.push([40*7,40*7,'Предполагаемая дата родов','Рождаются в этот день лишь 4–5% детей']);
+  e.push([41*7,41*7,'41 неделя','Обсудите с врачом план, если роды не начались']);
+  return e.sort((a,b)=>a[0]-b[0]);
+}
+function render(){
+  const res=document.getElementById('res');
+  const lmp=computeLMP();
+  const twins=document.getElementById('twins').checked, rh=document.getElementById('rh').checked;
+  if(lmp==null){res.innerHTML=`<div class="block"><h4>Результат</h4><p>Укажите дату — срок появится здесь.</p></div>`;return}
+  const now=today(), ga=Math.round((now-lmp)/DAY), edd=lmp+280*DAY;
+  if(ga<0||ga>44*7){res.innerHTML=`<div class="block"><h4>Проверьте дату</h4><p>${ga<0?'Дата в будущем.':'Получается больше 44 недель — проверьте дату.'}</p></div>`;return}
+  const w=Math.floor(ga/7), d=ga%7, tri=ga<14*7?1:ga<28*7?2:3, left=Math.round((edd-now)/DAY);
+  const pct=Math.min(100,ga/280*100);
+  let h=`<div class="block">
+    <h4>Ваш срок сегодня</h4>
+    <div class="big">${wk(w)}${d?` ${dy(d)}`:''}</div>
+    <p class="note">${tri}-й триместр · ${w+1}-я неделя беременности</p>
+    <div class="progress" aria-hidden="true"><i style="width:${pct}%"></i></div>
+    <div class="ticks"><span>0</span><span>14</span><span>28</span><span>40 нед</span></div>
+  </div>
+  <div class="block"><dl class="kv">
+    <dt>Дата родов</dt><dd>${fmt(edd)} (${WD[new Date(edd).getUTCDay()]})</dd>
+    <dt>До родов</dt><dd>${left>0?`${dy(left)} (около ${wk(Math.round(left/7))})`:'срок наступил'}</dd>
+    <dt>Доношенная с</dt><dd>${fmt(lmp+259*DAY)}</dd>
+    <dt>Зачатие примерно</dt><dd>${fmt(lmp+14*DAY)}</dd>
+  </dl></div>
+  <div class="block"><h4>Ваш календарь</h4><ul class="tl">`;
+  events(twins,rh).forEach(([a,b,title,desc])=>{
+    const cls=ga>b?'done':ga>=a?'now':'';
+    const dates=a===b?fmt(lmp+a*DAY):`${fmtShort(lmp+a*DAY)} – ${fmt(lmp+b*DAY)}`;
+    const wks=a===b?`${Math.floor(a/7)} нед`:`${Math.floor(a/7)}–${Math.floor(b/7)} нед`;
+    h+=`<li class="${cls}"><span class="dot"></span><div><b>${title}</b>${cls==='now'?' <span class="pill p2">сейчас</span>':''}<small>${wks} · ${dates}</small><small>${desc}</small></div></li>`;
+  });
+  h+=`</ul></div><p class="note">План ориентировочный: точные даты назначает ваш врач.</p>`;
+  res.innerHTML=h;
+}
+document.querySelectorAll('input[name=m]').forEach(r=>r.addEventListener('change',()=>{readInputs();method=r.value;renderInputs();render()}));
+document.querySelector('.form').addEventListener('input',()=>{readInputs();render()});
+renderInputs();render();
+</script>
+</body>
+</html>
