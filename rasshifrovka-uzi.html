@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Расшифровка УЗИ малого таза простым языком · OBGYN Tools</title>
+<meta name="description" content="Что значат М-эхо, жёлтое тело, фолликулярная киста, миома, аденомиоз, эндометриома и свободная жидкость в заключении УЗИ малого таза. Нормы толщины эндометрия по фазам цикла и после менопаузы.">
+<link rel="canonical" href="https://obgyntools.online/rasshifrovka-uzi.html">
+<meta property="og:title" content="Расшифровка УЗИ малого таза: М-эхо, кисты, миома">
+<meta property="og:description" content="Что значат М-эхо, жёлтое тело, фолликулярная киста, миома, аденомиоз, эндометриома и свободная жидкость в заключении УЗИ малого таза. Нормы толщины эндометрия по фазам цикла и после менопаузы.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Какая толщина эндометрия нормальная?", "acceptedAnswer": {"@type": "Answer", "text": "Она меняется по циклу: сразу после менструации обычно 2–6 мм, около овуляции 6–12 мм, во второй фазе 8–16 мм. После менопаузы без кровянистых выделений — обычно до 4 мм."}}, {"@type": "Question", "name": "Что такое жёлтое тело на УЗИ?", "acceptedAnswer": {"@type": "Answer", "text": "Это нормальная временная структура в яичнике, которая образуется после овуляции и вырабатывает прогестерон. Это не болезнь."}}, {"@type": "Question", "name": "Опасна ли фолликулярная киста?", "acceptedAnswer": {"@type": "Answer", "text": "Обычно нет. Это функциональная киста, которая в большинстве случаев исчезает сама за 1–3 цикла. Контроль УЗИ — на 5–7-й день следующего цикла."}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="kalkulyator-beremennosti.html">Беременность</a>
+      <a href="kalkulyator-ovulyacii.html">Овуляция</a>
+      <a href="kakaya-kontracepciya.html">Контрацепция</a>
+      <a href="podgotovka-k-uzi.html">УЗИ</a>
+      <a href="rasshifrovka-citologii.html">Цитология</a>
+      <a href="shkala-menopauzy.html">Менопауза</a>
+      <a href="vracham.html">Для врачей</a>
+    </nav>
+  </header>
+  <div class="pagehead">
+    <h1>Расшифровка УЗИ малого таза</h1>
+    <p>Проверьте толщину эндометрия из вашего заключения и найдите непонятные слова в словаре ниже. Окончательно результат оценивает врач — с учётом жалоб, осмотра и прошлых исследований.</p>
+  </div>
+
+  <div class="pt-layout">
+    <div class="form">
+      <fieldset>
+        <legend>Толщина эндометрия (М-эхо)</legend>
+        <div class="row">
+          <label class="field" for="mm">Толщина, мм<input type="number" id="mm" min="0" max="40" step="0.1" value="9" style="width:110px"></label>
+        </div>
+        <div class="seg-title">Ваша ситуация</div>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="st" value="f1"><span>1–7-й день цикла</span></label>
+          <label><input type="radio" name="st" value="f2"><span>8–14-й день (около овуляции)</span></label>
+          <label><input type="radio" name="st" value="f3" checked><span>Вторая половина цикла</span></label>
+          <label><input type="radio" name="st" value="pm"><span>После менопаузы</span></label>
+          <label><input type="radio" name="st" value="mht"><span>После менопаузы на МГТ</span></label>
+        </div>
+        <div class="checks" style="margin-top:10px" id="bleedBox">
+          <label class="chk"><input type="checkbox" id="bleed"><span>Есть кровянистые выделения после менопаузы</span></label>
+        </div>
+      </fieldset>
+      <p class="note">Для примера: 9 мм во второй половине цикла.</p>
+    </div>
+    <aside class="results" id="res" aria-live="polite"></aside>
+  </div>
+
+  <article class="article">
+    <h2>Словарь терминов из заключения</h2>
+    <h3>Матка и эндометрий</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>В заключении</th><th>Что это значит</th></tr></thead>
+      <tbody>
+        <tr><td>М-эхо, эндометрий</td><td>Внутренний слой матки, который растёт за цикл и отторгается с менструацией. Его толщина зависит от дня цикла.</td></tr>
+        <tr><td>Трёхслойный эндометрий</td><td>Нормальный вид эндометрия около овуляции.</td></tr>
+        <tr><td>Миома (интрамуральная, субсерозная, субмукозная)</td><td>Доброкачественный узел из мышечной ткани матки. Интрамуральная — в толще стенки, субсерозная — снаружи, субмукозная — выступает в полость. Лечение нужно не всегда: решают размер, расположение и жалобы.</td></tr>
+        <tr><td>Аденомиоз</td><td>Ткань, похожая на эндометрий, врастает в мышечный слой матки. Может давать болезненные и обильные менструации.</td></tr>
+        <tr><td>Полип эндометрия</td><td>Разрастание в полости матки. Лучше всего виден на 5–7-й день цикла. Часто его удаляют при гистероскопии.</td></tr>
+        <tr><td>Ретрофлексия, ретроверсия</td><td>Матка отклонена назад. Вариант нормы.</td></tr>
+        <tr><td>Наботовы кисты</td><td>Маленькие кисты на шейке матки. Норма, лечения не требуют.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Яичники</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>В заключении</th><th>Что это значит</th></tr></thead>
+      <tbody>
+        <tr><td>Доминантный фолликул</td><td>Самый крупный пузырёк, из которого произойдёт овуляция. Норма в первой половине цикла.</td></tr>
+        <tr><td>Жёлтое тело</td><td>Временная структура после овуляции, вырабатывает прогестерон. Норма. Бывает с кровоизлиянием — обычно проходит само.</td></tr>
+        <tr><td>Фолликулярная, функциональная киста</td><td>Неовулировавший фолликул. Чаще всего исчезает сама за 1–3 цикла; контроль — на 5–7-й день следующего цикла.</td></tr>
+        <tr><td>Эндометриоидная киста, эндометриома</td><td>Киста при эндометриозе, с «шоколадным» содержимым. Сама не исчезает; тактику определяет врач.</td></tr>
+        <tr><td>Дермоидная киста, тератома</td><td>Доброкачественное образование из разных тканей. Обычно наблюдение или плановая операция.</td></tr>
+        <tr><td>Мультифолликулярные яичники</td><td>Много мелких фолликулов. Само по себе не диагноз: синдром поликистозных яичников ставят только вместе с нарушением цикла и/или признаками избытка андрогенов.</td></tr>
+        <tr><td>O-RADS 1–5</td><td>Шкала риска для образований яичника: 1–2 — норма или почти наверняка доброкачественное; 3 — низкий риск; 4–5 — нужна консультация онкогинеколога.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Другое</h3>
+    <div class="tablewrap"><table>
+      <tbody>
+        <tr><td>Свободная жидкость в малом тазу</td><td>Небольшое количество — норма, особенно после овуляции. Много жидкости вместе с болью — повод к срочному осмотру.</td></tr>
+        <tr><td>Гидросальпинкс</td><td>Расширенная маточная труба с жидкостью. Важно при планировании беременности.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note" style="margin-top:24px">Ориентиры толщины эндометрия — по рекомендациям ACOG и Society of Radiologists in Ultrasound, классификация O-RADS — ACR. Страница объясняет термины и не ставит диагноз.</p>
+  </article>
+  <footer class="site-foot">
+    <div>Составлено врачом акушером-гинекологом. Материалы носят информационный характер и не заменяют консультацию. <a href="index.html">Все инструменты для пациенток</a> · <a href="vracham.html">Для врачей</a> · <a href="about.html">Источники и конфиденциальность</a></div>
+    <div>© 2026 obgyntools</div>
+  </footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const val=n=>document.querySelector(`input[name="${n}"]:checked`).value;
+function render(){
+  const mm=parseFloat($('mm').value), st=val('st'), bl=$('bleed').checked;
+  $('bleedBox').hidden=!(st==='pm'||st==='mht');
+  let lvl='p1',lab='В пределах ориентиров',txt='',ref='';
+  if(isNaN(mm)){$('res').innerHTML='<div class="block"><p>Введите толщину эндометрия.</p></div>';return}
+  if(st==='f1'){ref='обычно 2–6 мм';if(mm>8){lvl='p2';lab='Больше обычного';txt='Сразу после менструации эндометрий обычно тонкий. Утолщение в эти дни может быть вариантом нормы, но иногда так выглядит полип — обсудите с врачом.'}else txt='Нормальная толщина для начала цикла.'}
+  else if(st==='f2'){ref='обычно 6–12 мм';txt=mm>14?'Толщина больше обычного для середины цикла. Оценивают вместе со структурой и жалобами.':'Обычная толщина для середины цикла.';if(mm>14){lvl='p2';lab='Больше обычного'}}
+  else if(st==='f3'){ref='обычно 8–16 мм';txt=mm>18?'Эндометрий толще обычного. Во второй фазе это бывает и в норме; при сомнениях УЗИ повторяют на 5–7-й день следующего цикла.':'Обычная толщина для второй половины цикла.';if(mm>18){lvl='p2';lab='Больше обычного'}}
+  else{
+    ref=st==='mht'?'на МГТ эндометрий бывает толще; ориентир зависит от режима':'без выделений — обычно до 4 мм';
+    if(bl){
+      if(mm>4){lvl='p4';lab='Нужно дообследование';txt='Кровянистые выделения после менопаузы и эндометрий толще 4 мм — показание к дообследованию (обычно гистероскопия или биопсия эндометрия). Запишитесь к гинекологу в ближайшие 1–2 недели.'}
+      else{lvl='p3';lab='Нужен осмотр врача';txt='Тонкий эндометрий — хороший признак, но любые кровянистые выделения после менопаузы нужно обсудить с гинекологом.'}
+    } else {
+      if(st==='pm'&&mm<=4){txt='Нормальная толщина после менопаузы.'}
+      else if(mm<=11){lvl='p2';lab='Обсудите с врачом';txt=st==='mht'?'На гормональной терапии эндометрий может быть толще 4 мм. Врач оценит результат с учётом режима МГТ.':'Без выделений небольшое утолщение часто наблюдают с повторным УЗИ. Тактику определит врач.'}
+      else{lvl='p3';lab='Нужно дообследование';txt='Эндометрий заметно утолщён. Даже без выделений обычно назначают дообследование — запишитесь к гинекологу.'}
+    }
+  }
+  $('res').innerHTML=`<div class="block"><span class="pill ${lvl}">${lab}</span>
+    <div class="big" style="font-size:30px;margin-top:10px">${mm} мм</div>
+    <p class="note">Ориентир: ${ref}</p><p style="margin-top:8px">${txt}</p></div>
+    <p class="note">Толщина — лишь один из признаков. Врач учитывает структуру эндометрия, жалобы и прошлые исследования.</p>`;
+}
+document.querySelector('.form').addEventListener('input',render);
+document.querySelector('.form').addEventListener('change',render);
+render();
+</script>
+</body>
+</html>

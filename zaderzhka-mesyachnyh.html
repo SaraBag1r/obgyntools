@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Задержка месячных: что делать · OBGYN Tools</title>
+<meta name="description" content="Задержка месячных и отрицательный тест? Когда делать тест на беременность, какие бывают причины задержки, когда идти к гинекологу и когда нужна срочная помощь. Пошаговый ответ от врача.">
+<link rel="canonical" href="https://obgyntools.online/zaderzhka-mesyachnyh.html">
+<meta property="og:title" content="Задержка месячных: что делать — пошагово">
+<meta property="og:description" content="Задержка месячных и отрицательный тест? Когда делать тест на беременность, какие бывают причины задержки, когда идти к гинекологу и когда нужна срочная помощь. Пошаговый ответ от врача.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Когда делать тест на беременность при задержке?", "acceptedAnswer": {"@type": "Answer", "text": "С первого дня задержки, лучше утренней мочой. Если тест отрицательный, а менструации нет, повторите через 3–5 дней или сдайте анализ крови на ХГЧ."}}, {"@type": "Question", "name": "Какая задержка считается нормальной?", "acceptedAnswer": {"@type": "Answer", "text": "Колебания цикла на несколько дней — норма. Если менструации нет больше недели после ожидаемой даты, сделайте тест на беременность. Если менструаций нет 3 месяца и тест отрицательный — нужен осмотр гинеколога."}}, {"@type": "Question", "name": "Когда задержка опасна?", "acceptedAnswer": {"@type": "Answer", "text": "Срочно к врачу, если тест положительный и есть боль внизу живота, кровянистые выделения, слабость или головокружение: так может проявляться внематочная беременность."}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="kalkulyator-beremennosti.html">Беременность</a>
+      <a href="kalkulyator-ovulyacii.html">Овуляция</a>
+      <a href="kakaya-kontracepciya.html">Контрацепция</a>
+      <a href="podgotovka-k-uzi.html">УЗИ</a>
+      <a href="rasshifrovka-citologii.html">Цитология</a>
+      <a href="shkala-menopauzy.html">Менопауза</a>
+      <a href="vracham.html">Для врачей</a>
+    </nav>
+  </header>
+  <div class="pagehead">
+    <h1>Задержка месячных: что делать</h1>
+    <p>Ответьте на несколько вопросов — получите пошаговый план: когда делать тест, что может быть причиной и когда идти к врачу.</p>
+  </div>
+
+  <div class="pt-layout">
+    <div class="form">
+      <fieldset>
+        <legend>Задержка</legend>
+        <div class="row"><label class="field" for="days">Дней задержки<input type="number" id="days" min="1" max="365" value="5" style="width:110px"></label></div>
+        <div class="seg-title">Тест на беременность</div>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="test" value="none"><span>Не делала</span></label>
+          <label><input type="radio" name="test" value="neg" checked><span>Отрицательный</span></label>
+          <label><input type="radio" name="test" value="pos"><span>Положительный</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Есть ли сейчас</legend>
+        <div class="checks">
+          <label class="chk"><input type="checkbox" id="pain"><span>Боль внизу живота, особенно с одной стороны</span></label>
+          <label class="chk"><input type="checkbox" id="spot"><span>Кровянистые выделения</span></label>
+          <label class="chk"><input type="checkbox" id="faint"><span>Слабость, головокружение, обморок</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Что может влиять</legend>
+        <div class="checks">
+          <label class="chk"><input type="checkbox" id="coc"><span>Принимаю гормональные таблетки или стоит гормональная спираль</span></label>
+          <label class="chk"><input type="checkbox" id="bf"><span>Кормлю грудью</span></label>
+          <label class="chk"><input type="checkbox" id="stress"><span>Сильный стресс, резкое похудение, интенсивный спорт</span></label>
+          <label class="chk"><input type="checkbox" id="pcos"><span>Цикл часто нерегулярный, лишние волосы на лице и теле, акне</span></label>
+          <label class="chk"><input type="checkbox" id="milk"><span>Выделения из груди, не связанные с кормлением</span></label>
+          <label class="chk"><input type="checkbox" id="age45"><span>Мне 45 лет или больше</span></label>
+        </div>
+      </fieldset>
+      <p class="note">Для примера: задержка 5 дней, тест отрицательный.</p>
+    </div>
+    <aside class="results" id="res" aria-live="polite"></aside>
+  </div>
+
+  <article class="article">
+    <h2>Частые причины задержки</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Причина</th><th>Что важно знать</th></tr></thead>
+      <tbody>
+        <tr><td>Беременность</td><td>Самая частая причина у женщин, живущих половой жизнью. Тест надёжен с первого дня задержки.</td></tr>
+        <tr><td>Стресс, похудение, спорт</td><td>Мозг временно «выключает» овуляцию. Цикл обычно восстанавливается сам, но долгое отсутствие менструаций вредно для костей — нужен врач.</td></tr>
+        <tr><td>Синдром поликистозных яичников</td><td>Редкие, нерегулярные менструации, часто акне и избыток волос. Лечится; важно для фертильности и обмена веществ.</td></tr>
+        <tr><td>Щитовидная железа, пролактин</td><td>Проверяют анализами крови: ТТГ, пролактин.</td></tr>
+        <tr><td>Кормление грудью</td><td>Менструаций может не быть месяцами — это норма. Но забеременеть можно и до первой менструации.</td></tr>
+        <tr><td>Гормональная контрацепция</td><td>На таблетках и гормональной спирали менструации могут стать скудными или исчезнуть — обычно это безопасно.</td></tr>
+        <tr><td>Перименопауза</td><td>После 40–45 лет цикл становится нерегулярным. <a href="shkala-menopauzy.html">Тест на климакс</a></td></tr>
+      </tbody>
+    </table></div>
+    <h2>Какие обследования назначает врач</h2>
+    <p>Обычно: анализ крови на ХГЧ, УЗИ малого таза, гормоны — ТТГ, пролактин, ФСГ, ЛГ, иногда тестостерон и АМГ. Конкретный набор зависит от вашей ситуации.</p>
+  </article>
+  <footer class="site-foot">
+    <div>Составлено врачом акушером-гинекологом. Материалы носят информационный характер и не заменяют консультацию. <a href="index.html">Все инструменты для пациенток</a> · <a href="vracham.html">Для врачей</a> · <a href="about.html">Источники и конфиденциальность</a></div>
+    <div>© 2026 obgyntools</div>
+  </footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const val=n=>document.querySelector(`input[name="${n}"]:checked`).value;
+function render(){
+  const d=parseInt($('days').value)||0, t=val('test'), c=id=>$(id).checked;
+  const alarm=c('pain')||c('spot')||c('faint');
+  let lvl,lab,title,steps=[],notes=[];
+  if(alarm&&t!=='neg'){
+    lvl='p4';lab='Срочно';title=t==='pos'?'Положительный тест и тревожные симптомы':'Сначала исключите беременность — срочно';
+    steps=['Звоните 103 или 112, если боль сильная, есть слабость или головокружение','Иначе — к гинекологу или в приёмное отделение сегодня: нужны УЗИ и анализ крови на ХГЧ','Так может проявляться внематочная беременность — её важно не пропустить'];
+  } else if(t==='pos'){
+    lvl='p2';lab='Беременность';title='Тест положительный';
+    steps=['Начните принимать фолиевую кислоту 400 мкг в день, если ещё не принимаете','УЗИ — через 1–2 недели задержки (5–6 недель от последней менструации): раньше плодное яйцо может быть не видно','Встаньте на учёт до 12 недель','Если появятся боль или кровянистые выделения — сразу к врачу'];
+    notes.push('<a href="kalkulyator-beremennosti.html">Посчитайте срок и дату родов</a>');
+  } else if(t==='none'){
+    lvl='p2';lab='Первый шаг';title='Сделайте тест на беременность';
+    steps=['Тест надёжен с первого дня задержки; лучше утренней мочой','Если отрицательный, а менструации нет — повторите через 3–5 дней или сдайте кровь на ХГЧ'];
+    if(alarm) steps.unshift('При боли или кровянистых выделениях не ждите — обратитесь к врачу сегодня');
+  } else {
+    if(d>=90){lvl='p3';lab='К врачу';title='Менструаций нет 3 месяца и больше';steps=['Запишитесь к гинекологу в ближайшие 1–2 недели','Обычно назначают УЗИ и анализы: ХГЧ, ТТГ, пролактин, ФСГ, ЛГ']}
+    else if(d>=10){lvl='p3';lab='К врачу';title='Задержка больше 10 дней, тест отрицательный';steps=['Сдайте анализ крови на ХГЧ — он точнее теста','Если ХГЧ отрицательный — запишитесь к гинекологу: нужно выяснить причину','Если менструация придёт — отметьте даты, они пригодятся врачу']}
+    else{lvl='p1';lab='Можно подождать';title='Задержка небольшая, тест отрицательный';steps=['Повторите тест через 3–5 дней, если менструация не придёт','Колебания цикла на несколько дней бывают и в норме','Если задержка дойдёт до 10 дней — сдайте кровь на ХГЧ и запишитесь к гинекологу']}
+    if(alarm){
+      if(c('faint')){lvl='p4';lab='Срочно';steps.unshift('Слабость или обморок — звоните 103 или 112. Тест мог быть сделан слишком рано или неправильно')}
+      else{if(lvl==='p1'){lvl='p3';lab='К врачу'}steps.unshift('Боль или кровянистые выделения — покажитесь гинекологу в ближайшие 1–2 дня; при сильной боли — сразу 103')}
+    }
+  }
+  if(c('coc')) notes.push('На гормональных таблетках и спирали менструации могут стать скудными или пропасть. Если таблетки не пропускали — это обычно безопасно. <a href="priem-kok.html">Подробнее о приёме КОК</a>');
+  if(c('bf')) notes.push('При кормлении грудью менструаций может не быть долго — это норма. Но забеременеть можно и до первой менструации.');
+  if(c('stress')) notes.push('Стресс, похудение и нагрузки могут останавливать овуляцию. Если менструаций нет 3 месяца — нужен врач: это влияет на кости и фертильность.');
+  if(c('pcos')) notes.push('Нерегулярный цикл с акне и избытком волос — возможный признак синдрома поликистозных яичников. Стоит обследоваться у гинеколога.');
+  if(c('milk')) notes.push('Выделения из груди вне кормления — проверьте пролактин и обратитесь к врачу.');
+  if(c('age45')) notes.push('После 45 лет задержки часто связаны с перименопаузой. <a href="shkala-menopauzy.html">Пройдите тест на климакс</a>. Предохраняться всё ещё нужно.');
+  let h=`<div class="block"><span class="pill ${lvl}">${lab}</span><h2 class="big" style="font-size:26px;margin-top:10px">${title}</h2><h4 style="margin-top:12px">Что сделать</h4><ol class="steps">${steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>`;
+  notes.forEach(n=>{h+=`<div class="block"><p>${n}</p></div>`});
+  h+='<p class="note">Информационная подсказка, не диагноз.</p>';
+  $('res').innerHTML=h;
+}
+document.querySelector('.form').addEventListener('input',render);
+document.querySelector('.form').addEventListener('change',render);
+render();
+</script>
+</body>
+</html>

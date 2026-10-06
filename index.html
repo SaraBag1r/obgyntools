@@ -1,99 +1,117 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OBGYN Tools</title>
-<meta name="description" content="Free clinical decision aids for obstetrics and gynecology: contraceptive eligibility (US MEC 2024) and menopausal hormone therapy. Guideline-based, bilingual RU/EN, no data leaves your browser.">
-<meta property="og:title" content="OBGYN Tools">
-<meta property="og:description" content="Clinical decision aids for OB-GYN, built on international guidelines.">
-<meta property="og:type" content="website">
+<title>Понятные ответы от врача-гинеколога · OBGYN Tools</title>
+<meta name="description" content="Бесплатные инструменты от врача акушера-гинеколога: калькулятор беременности и овуляции, задержка месячных, выбор контрацепции, подготовка к УЗИ, расшифровка УЗИ и мазка, маммография, тест на климакс.">
+<link rel="canonical" href="https://obgyntools.online/">
+<meta property="og:title" content="Понятные ответы от врача-гинеколога">
+<meta property="og:description" content="Бесплатные инструменты от врача акушера-гинеколога: калькулятор беременности и овуляции, задержка месячных, выбор контрацепции, подготовка к УЗИ, расшифровка УЗИ и мазка, маммография, тест на климакс.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
 <link rel="stylesheet" href="style.css">
-<script src="i18n.js"></script>
-<script>window.PAGE_TITLE=['OBGYN Tools — инструменты для акушеров-гинекологов','OBGYN Tools'];</script>
 </head>
 <body>
 <div class="wrap">
   <header class="site">
     <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
     <nav>
-      <a href="contraception.html"><span lang="ru">Контрацепция</span><span lang="en">Contraception</span></a>
-      <a href="menopause.html"><span lang="ru">МГТ</span><span lang="en">Menopause HT</span></a>
-      <a href="literature.html"><span lang="ru">Литература</span><span lang="en">Literature</span></a>
-      <a href="about.html"><span lang="ru">О проекте</span><span lang="en">About</span></a>
-      <a href="pacientkam.html"><span lang="ru">Для пациенток</span><span lang="en">For patients (RU)</span></a>
-      <div class="lang" role="group" aria-label="Language"><button data-lang="ru" aria-pressed="false">RU</button><button data-lang="en" aria-pressed="true">EN</button></div>
+      <a href="index.html" aria-current="page">Главная</a>
+      <a href="kalkulyator-beremennosti.html">Беременность</a>
+      <a href="kalkulyator-ovulyacii.html">Овуляция</a>
+      <a href="kakaya-kontracepciya.html">Контрацепция</a>
+      <a href="podgotovka-k-uzi.html">УЗИ</a>
+      <a href="rasshifrovka-citologii.html">Цитология</a>
+      <a href="shkala-menopauzy.html">Менопауза</a>
+      <a href="vracham.html">Для врачей</a>
     </nav>
   </header>
-
   <section class="hero">
-    <div class="eyebrow"><span lang="ru">Для акушеров-гинекологов</span><span lang="en">For OB-GYN clinicians</span></div>
-    <h1><span lang="ru">Решения по гайдлайнам за 30 секунд</span><span lang="en">Guideline answers in 30 seconds</span></h1>
-    <p><span lang="ru">Отметьте состояния пациентки — получите категории приемлемости методов и тактику со ссылкой на руководство. Бесплатно, на русском и английском, без регистрации.</span><span lang="en">Tick your patient's conditions and get eligibility categories and a management outline, each traced to its guideline. Free, in English and Russian, no sign-up.</span></p>
+    <div class="eyebrow">Для женщин · от врача акушера-гинеколога</div>
+    <h1>Понятные ответы от врача-гинеколога</h1>
+    <p>Посчитать срок и дни овуляции, понять заключение УЗИ или мазка, выбрать контрацепцию, узнать, когда идти к врачу. Бесплатно, без регистрации; ваши данные никуда не отправляются.</p>
+    <p class="note">Вы врач? <a href="vracham.html">Раздел для специалистов →</a></p>
   </section>
 
+  <h2 class="sec">Беременность и её планирование</h2>
   <div class="tools">
-    <a class="tool" href="contraception.html">
-      <span class="badge"><span lang="ru">Доступно</span><span lang="en">Live</span></span>
-      <h3><span lang="ru">Приемлемость контрацепции</span><span lang="en">Contraceptive eligibility</span></h3>
-      <p><span lang="ru">6 методов, около 45 состояний. Категория 1–4 и причина для каждого метода.</span><span lang="en">6 methods, about 45 conditions. A 1–4 category and the reason behind it for every method.</span></p>
-      <div class="mini"><i class="k1">1</i><i class="k2">2</i><i class="k3">3</i><i class="k4">4</i></div>
-      <span class="src">US MEC 2024 · WHO MEC</span>
-    </a>
-    <a class="tool" href="menopause.html">
-      <span class="badge"><span lang="ru">Доступно</span><span lang="en">Live</span></span>
-      <h3><span lang="ru">Менопаузальная гормонотерапия</span><span lang="en">Menopausal hormone therapy</span></h3>
-      <p><span lang="ru">Показания и противопоказания, режим, путь введения, дозы, прогестаген, негормональные альтернативы.</span><span lang="en">Indications and contraindications, regimen, route, doses, progestogen choice, non-hormonal options.</span></p>
-      <span class="src">Menopause Society 2022 · IMS · <span lang="ru">КР МЗ РФ</span><span lang="en">RU national guideline</span></span>
-    </a>
-    <a class="tool" href="literature.html">
-      <span class="badge"><span lang="ru">Обновляется</span><span lang="en">Live feed</span></span>
-      <h3><span lang="ru">Литература из PubMed</span><span lang="en">PubMed literature</span></h3>
-      <p><span lang="ru">Свежие РКИ, метаанализы и гайдлайны ведущих журналов плюс исследования, которые изменили практику.</span><span lang="en">Fresh RCTs, meta-analyses and guidelines from leading journals, plus studies that changed practice.</span></p>
-      <span class="src">PubMed · NEJM · Lancet · AJOG · BJOG</span>
-    </a>
-    <div class="tool soon">
-      <span class="badge"><span lang="ru">Скоро</span><span lang="en">Coming soon</span></span>
-      <h3><span lang="ru">Цитология и ВПЧ: тактика</span><span lang="en">Cervical screening follow-up</span></h3>
-      <p><span lang="ru">Результаты Пап-теста и ВПЧ → повтор, кольпоскопия или выписка из скрининга.</span><span lang="en">Pap and HPV results → repeat, colposcopy, or return to routine screening.</span></p>
-      <span class="src">ASCCP 2019</span>
-    </div>
-    <div class="tool soon">
-      <span class="badge"><span lang="ru">Скоро</span><span lang="en">Coming soon</span></span>
-      <h3><span lang="ru">Лаборатория беременной</span><span lang="en">Pregnancy lab ranges</span></h3>
-      <p><span lang="ru">Нормы ТТГ, гемоглобина, тромбоцитов и печёночных проб по триместрам.</span><span lang="en">Trimester-specific ranges for TSH, hemoglobin, platelets and liver tests.</span></p>
-      <span class="src">ACOG · ATA</span>
-    </div>
-    <div class="tool soon">
-      <span class="badge"><span lang="ru">Скоро</span><span lang="en">Coming soon</span></span>
-      <h3><span lang="ru">Вагинит: дифференциальный диагноз</span><span lang="en">Vaginitis differential</span></h3>
-      <p><span lang="ru">pH, выделения, микроскопия, критерии Амселя → диагноз и схема лечения.</span><span lang="en">pH, discharge, microscopy, Amsel criteria → likely diagnosis and treatment.</span></p>
-      <span class="src">CDC STI 2021</span>
-    </div>
+    <a class="tool" href="kalkulyator-beremennosti.html"><h3>Калькулятор беременности</h3><p>Срок по неделям, дата родов и календарь скринингов, анализов и декрета.</p><span class="src">по менструации · зачатию · ЭКО · УЗИ</span></a>
+    <a class="tool" href="kalkulyator-ovulyacii.html"><h3>Калькулятор овуляции</h3><p>Благоприятные дни для зачатия на 3 цикла вперёд и дата теста.</p><span class="src">фертильное окно</span></a>
+    <a class="tool" href="planirovanie-beremennosti.html"><h3>Планирую беременность</h3><p>Чек-лист: витамины, анализы, прививки, лекарства. Прогресс сохраняется.</p><span class="src">чек-лист</span></a>
+    <a class="tool" href="zaderzhka-mesyachnyh.html"><h3>Задержка месячных</h3><p>Когда делать тест, частые причины и когда идти к врачу.</p><span class="src">пошаговый план</span></a>
   </div>
 
-  <h2 class="sec"><span lang="ru">Для пациенток</span><span lang="en">For patients (in Russian)</span></h2>
+  <h2 class="sec">Контрацепция</h2>
   <div class="tools">
-    <a class="tool" href="kalkulyator-beremennosti.html"><h3><span lang="ru">Калькулятор беременности</span><span lang="en">Pregnancy due date calculator</span></h3><p><span lang="ru">Срок, дата родов и календарь обследований.</span><span lang="en">Gestational age, due date and a schedule of checks.</span></p></a>
-    <a class="tool" href="propustila-tabletku.html"><h3><span lang="ru">Пропустила таблетку</span><span lang="en">Missed pill</span></h3><p><span lang="ru">Что делать при пропуске КОК или мини-пили.</span><span lang="en">What to do after a missed combined or progestin-only pill.</span></p></a>
-    <a class="tool" href="rasshifrovka-citologii.html"><h3><span lang="ru">Расшифровка цитологии и ВПЧ</span><span lang="en">Pap and HPV results explained</span></h3><p><span lang="ru">NILM, ASC-US, LSIL, HSIL простым языком.</span><span lang="en">NILM, ASC-US, LSIL, HSIL in plain language.</span></p></a>
-    <a class="tool" href="shkala-menopauzy.html"><h3><span lang="ru">Тест на климакс</span><span lang="en">Menopause symptom score</span></h3><p><span lang="ru">Шкала MRS: 11 вопросов.</span><span lang="en">Menopause Rating Scale, 11 questions.</span></p></a>
+    <a class="tool" href="kakaya-kontracepciya.html"><h3>Какая контрацепция мне подходит</h3><p>Несколько вопросов — и 2–3 метода, которые стоит обсудить с врачом.</p><span class="src">ВОЗ · CDC MEC</span></a>
+    <a class="tool" href="priem-kok.html"><h3>Принимаю КОК: на что обратить внимание</h3><p>Опасные симптомы, что нормально в первые месяцы, какие нужны обследования.</p><span class="src">ВОЗ · CDC · FSRH</span></a>
+    <a class="tool" href="propustila-tabletku.html"><h3>Пропустила таблетку</h3><p>Нужно ли предохраняться дополнительно и когда нужна экстренная контрацепция.</p><span class="src">КОК и мини-пили</span></a>
   </div>
 
-  <div class="principles">
-    <div><h4><span lang="ru">Каждый вывод со ссылкой</span><span lang="en">Every answer is sourced</span></h4><p><span lang="ru">Инструмент показывает, какое состояние определило результат и по какому руководству.</span><span lang="en">You see which condition drove the result and which guideline it comes from.</span></p></div>
-    <div><h4><span lang="ru">Данные не покидают браузер</span><span lang="en">Nothing leaves your browser</span></h4><p><span lang="ru">Расчёт идёт на вашем устройстве. Мы ничего не сохраняем и не передаём.</span><span lang="en">All calculations run on your device. Nothing is stored or sent.</span></p></div>
-    <div><h4><span lang="ru">Создано врачом</span><span lang="en">Built by a clinician</span></h4><p><span lang="ru">Автор — практикующий акушер-гинеколог.</span><span lang="en">Written by a practising obstetrician-gynecologist.</span></p></div>
+  <h2 class="sec">Обследования и анализы</h2>
+  <div class="tools">
+    <a class="tool" href="podgotovka-k-uzi.html"><h3>Подготовка к УЗИ малого таза</h3><p>В какой день цикла делать УЗИ — ваши даты по цели исследования.</p><span class="src">УЗИ</span></a>
+    <a class="tool" href="rasshifrovka-uzi.html"><h3>Расшифровка УЗИ малого таза</h3><p>Толщина эндометрия, кисты, миома, М-эхо — простым языком.</p><span class="src">УЗИ · O-RADS</span></a>
+    <a class="tool" href="rasshifrovka-citologii.html"><h3>Расшифровка мазка на цитологию</h3><p>NILM, ASC-US, LSIL, HSIL и ВПЧ — что значит и что дальше.</p><span class="src">Bethesda · ASCCP</span></a>
+    <a class="tool" href="skrining-grudi.html"><h3>Маммография и УЗИ груди</h3><p>С какого возраста и как часто — с учётом наследственности и МГТ.</p><span class="src">диспансеризация РФ · USPSTF</span></a>
   </div>
 
+  <h2 class="sec">Симптомы</h2>
+  <div class="tools">
+    <a class="tool" href="vydeleniya.html"><h3>Выделения и зуд</h3><p>Когда это норма, а когда повод к врачу и насколько срочно.</p><span class="src">CDC</span></a>
+    <a class="tool" href="shkala-menopauzy.html"><h3>Тест на климакс</h3><p>11 вопросов о приливах, сне и настроении. Результат можно показать врачу.</p><span class="src">шкала MRS</span></a>
+  </div>
+
+  <h2 class="sec" id="srochno">Когда нужно срочно к врачу</h2>
+  <div class="urgent"><b>Угроза жизни — звоните 103 или 112.</b> Не ждите приёма, если состояние резко ухудшается.</div>
+  <div class="flags" style="margin-top:14px">
+    <div class="flag">
+      <h3>Во время беременности — сразу в роддом или скорую</h3>
+      <ul>
+        <li>Кровянистые выделения из влагалища</li>
+        <li>Сильная или нарастающая боль в животе</li>
+        <li>Подтекание или излитие вод</li>
+        <li>Малыш шевелится заметно меньше обычного (после 28 недель)</li>
+        <li>Сильная головная боль, «мушки» перед глазами, внезапные отёки лица и рук</li>
+        <li>Температура 38 °C и выше</li>
+      </ul>
+    </div>
+    <div class="flag">
+      <h3>После родов — сразу к врачу или в скорую</h3>
+      <ul>
+        <li>Кровотечение, при котором прокладка промокает за час или меньше</li>
+        <li>Температура 38 °C и выше, выделения с неприятным запахом</li>
+        <li>Боль в груди, одышка</li>
+        <li>Отёк, боль и покраснение одной ноги</li>
+        <li>Мысли навредить себе или ребёнку</li>
+      </ul>
+    </div>
+    <div class="flag">
+      <h3>На гормональных таблетках — срочно</h3>
+      <ul>
+        <li>Боль и отёк одной ноги</li>
+        <li>Боль в груди или внезапная одышка</li>
+        <li>Внезапная очень сильная головная боль, нарушение зрения или речи, слабость в руке или ноге</li>
+      </ul>
+    </div>
+    <div class="flag">
+      <h3>В любом возрасте</h3>
+      <ul>
+        <li><b>Срочно:</b> внезапная сильная боль внизу живота, особенно при задержке менструации или положительном тесте</li>
+        <li><b>Срочно:</b> очень обильное кровотечение со слабостью или головокружением</li>
+        <li><b>В ближайшие 1–2 недели:</b> любые кровянистые выделения после менопаузы</li>
+        <li><b>В ближайшие 1–2 недели:</b> кровотечения после секса или между менструациями</li>
+      </ul>
+    </div>
+  </div>
   <footer class="site-foot">
-    <div><span lang="ru">Справочный инструмент для медицинских специалистов. Не заменяет клиническое суждение и не предназначен для пациентов.</span><span lang="en">A reference aid for healthcare professionals. It does not replace clinical judgement and is not intended for patients.</span> <a href="about.html"><span lang="ru">Источники и ограничения</span><span lang="en">Sources and limitations</span></a></div>
+    <div>Составлено врачом акушером-гинекологом. Материалы носят информационный характер и не заменяют консультацию. <a href="index.html">Все инструменты для пациенток</a> · <a href="vracham.html">Для врачей</a> · <a href="about.html">Источники и конфиденциальность</a></div>
     <div>© 2026 obgyntools</div>
   </footer>
 </div>
+
 </body>
 </html>

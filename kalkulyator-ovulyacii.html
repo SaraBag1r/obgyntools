@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Калькулятор овуляции: благоприятные дни для зачатия · OBGYN Tools</title>
+<meta name="description" content="Рассчитайте день овуляции и благоприятные дни для зачатия на 3 цикла вперёд, а также дату, когда делать тест на беременность. Составлено врачом акушером-гинекологом.">
+<link rel="canonical" href="https://obgyntools.online/kalkulyator-ovulyacii.html">
+<meta property="og:title" content="Калькулятор овуляции и фертильного окна">
+<meta property="og:description" content="Рассчитайте день овуляции и благоприятные дни для зачатия на 3 цикла вперёд, а также дату, когда делать тест на беременность. Составлено врачом акушером-гинекологом.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Когда бывает овуляция?", "acceptedAnswer": {"@type": "Answer", "text": "Обычно примерно за 14 дней до начала следующей менструации. При цикле 28 дней — около 14-го дня, при цикле 32 дня — около 18-го."}}, {"@type": "Question", "name": "В какие дни можно забеременеть?", "acceptedAnswer": {"@type": "Answer", "text": "Шанс есть в течение примерно 6 дней: 5 дней до овуляции и в день овуляции. Самые высокие шансы — за 1–2 дня до овуляции."}}, {"@type": "Question", "name": "Можно ли использовать калькулятор овуляции как контрацепцию?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Календарный метод ненадёжен: овуляция может сдвигаться из-за стресса, болезни, перелётов."}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="kalkulyator-beremennosti.html">Беременность</a>
+      <a href="kalkulyator-ovulyacii.html" aria-current="page">Овуляция</a>
+      <a href="kakaya-kontracepciya.html">Контрацепция</a>
+      <a href="podgotovka-k-uzi.html">УЗИ</a>
+      <a href="rasshifrovka-citologii.html">Цитология</a>
+      <a href="shkala-menopauzy.html">Менопауза</a>
+      <a href="vracham.html">Для врачей</a>
+    </nav>
+  </header>
+  <div class="pagehead">
+    <h1>Калькулятор овуляции</h1>
+    <p>Укажите первый день последней менструации и длину цикла — покажем дни овуляции, благоприятные дни для зачатия на 3 цикла вперёд и когда делать тест на беременность.</p>
+  </div>
+
+  <div class="pt-layout">
+    <div class="form">
+      <fieldset>
+        <legend>Ваш цикл</legend>
+        <div class="row">
+          <label class="field" for="lmp">Первый день последней менструации<input type="date" id="lmp"></label>
+          <label class="field" for="cyc">Длина цикла, дней<input type="number" id="cyc" min="21" max="45" value="28" style="width:110px"></label>
+          <label class="field" for="lut">Вторая фаза, дней<input type="number" id="lut" min="10" max="16" value="14" style="width:100px"></label>
+        </div>
+        <p class="note" style="margin-top:10px">Длина цикла — от первого дня одной менструации до первого дня следующей. Если она меняется, возьмите среднее за последние 3–6 месяцев. Длину второй фазы меняйте, только если знаете её точно (по тестам или УЗИ).</p>
+      </fieldset>
+      <fieldset>
+        <legend>Как точнее определить овуляцию</legend>
+        <ul class="steps" style="list-style:disc">
+          <li><b>Тесты на овуляцию (ЛГ)</b> — начинайте за 2–3 дня до расчётной даты. Положительный тест — овуляция обычно через 24–36 часов.</li>
+          <li><b>Шеечная слизь</b> — в благоприятные дни она прозрачная и тянется, как яичный белок.</li>
+          <li><b>УЗИ-фолликулометрия</b> — самый точный способ, особенно при нерегулярном цикле. <a href="podgotovka-k-uzi.html">Когда делать</a></li>
+        </ul>
+      </fieldset>
+    </div>
+    <aside class="results" id="res" aria-live="polite"></aside>
+  </div>
+
+  <article class="article">
+    <h2>Как считается овуляция</h2>
+    <p>Вторая фаза цикла (от овуляции до менструации) у большинства женщин довольно постоянна — около 14 дней. Поэтому овуляцию считают «от обратного»: длина цикла минус 14. Первая фаза может быть разной длины — от неё и зависит, длинный цикл или короткий.</p>
+    <p>Сперматозоиды живут в организме женщины до 5 дней, яйцеклетка — около суток. Поэтому «окно фертильности» — примерно 6 дней, и самые высокие шансы — за 1–2 дня до овуляции.</p>
+    <h2>Когда обратиться к врачу</h2>
+    <ul>
+      <li>Беременность не наступает 12 месяцев регулярной половой жизни без защиты, если вам меньше 35 лет</li>
+      <li>6 месяцев — если вам 35–39 лет; если 40 и больше — лучше сразу</li>
+      <li>Цикл короче 21 или длиннее 35 дней, или очень нерегулярный</li>
+      <li>Болезненные менструации, эндометриоз, операции на органах малого таза в прошлом</li>
+    </ul>
+    <p>Готовитесь к беременности? <a href="planirovanie-beremennosti.html">Чек-лист подготовки</a></p>
+    <p class="note" style="margin-top:24px">Калькулятор не является методом контрацепции: овуляция может сдвигаться из-за стресса, болезни, смены часовых поясов.</p>
+  </article>
+  <footer class="site-foot">
+    <div>Составлено врачом акушером-гинекологом. Материалы носят информационный характер и не заменяют консультацию. <a href="index.html">Все инструменты для пациенток</a> · <a href="vracham.html">Для врачей</a> · <a href="about.html">Источники и конфиденциальность</a></div>
+    <div>© 2026 obgyntools</div>
+  </footer>
+</div>
+<script>
+const DAY=864e5, M=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'], WD=['вс','пн','вт','ср','чт','пт','сб'];
+const $=id=>document.getElementById(id);
+const today=()=>{const d=new Date();return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())};
+const parse=s=>{if(!s)return null;const [y,m,d]=s.split('-').map(Number);return Date.UTC(y,m-1,d)};
+const iso=t=>new Date(t).toISOString().slice(0,10);
+const fmt=t=>{const d=new Date(t);return d.getUTCDate()+' '+M[d.getUTCMonth()]};
+const fmtW=t=>fmt(t)+', '+WD[new Date(t).getUTCDay()];
+$('lmp').value=iso(today()-10*DAY);
+function render(){
+  const lmp=parse($('lmp').value), cyc=Math.min(45,Math.max(21,parseInt($('cyc').value)||28)), lut=Math.min(16,Math.max(10,parseInt($('lut').value)||14));
+  if(lmp==null){$('res').innerHTML='<div class="block"><p>Укажите дату менструации.</p></div>';return}
+  const now=today();
+  let k=0; while(lmp+(k*cyc+cyc-lut)*DAY<now-DAY) k++; // first cycle whose ovulation is not past
+  let h='';
+  for(let i=0;i<3;i++){
+    const start=lmp+(k+i)*cyc*DAY, ov=start+(cyc-lut)*DAY, f1=ov-5*DAY, next=start+cyc*DAY;
+    const cur=i===0;
+    h+=`<div class="block"><h4>${cur?'Ближайший цикл':'Цикл с '+fmt(start)}</h4>
+      ${cur?`<div class="big" style="font-size:30px">Овуляция ≈ ${fmtW(ov)}</div>`:`<p><b>Овуляция ≈ ${fmtW(ov)}</b></p>`}
+      <dl class="kv" style="margin-top:8px">
+        <dt>Благоприятные дни</dt><dd>${fmt(f1)} – ${fmt(ov+DAY)}</dd>
+        <dt>Самые высокие шансы</dt><dd>${fmt(ov-2*DAY)} – ${fmt(ov)}</dd>
+        <dt>Следующая менструация</dt><dd>≈ ${fmt(next)}</dd>
+        <dt>Тест на беременность</dt><dd>с ${fmt(next)}</dd>
+      </dl></div>`;
+  }
+  h+='<p class="note">Расчёт для регулярного цикла. При нерегулярном цикле точнее тесты на овуляцию или УЗИ.</p>';
+  $('res').innerHTML=h;
+}
+document.querySelector('.form').addEventListener('input',render);
+render();
+</script>
+</body>
+</html>

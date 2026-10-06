@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Подготовка к УЗИ малого таза: в какой день цикла делать · OBGYN Tools</title>
+<meta name="description" content="В какой день цикла делать УЗИ малого таза при миоме, кистах, полипах, эндометриозе и для отслеживания овуляции. Нужно ли наполнять мочевой пузырь. Личные даты по вашему циклу.">
+<link rel="canonical" href="https://obgyntools.online/podgotovka-k-uzi.html">
+<meta property="og:title" content="УЗИ малого таза: в какой день цикла и как подготовиться">
+<meta property="og:description" content="В какой день цикла делать УЗИ малого таза при миоме, кистах, полипах, эндометриозе и для отслеживания овуляции. Нужно ли наполнять мочевой пузырь. Личные даты по вашему циклу.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "В какой день цикла делать УЗИ малого таза?", "acceptedAnswer": {"@type": "Answer", "text": "Для планового осмотра — на 5–7-й день цикла, сразу после менструации. Для отслеживания овуляции — с 8–10-го дня несколько раз. Для оценки жёлтого тела — примерно через неделю после овуляции. При боли или кровотечении — в любой день, не дожидаясь."}}, {"@type": "Question", "name": "Нужно ли пить воду перед УЗИ малого таза?", "acceptedAnswer": {"@type": "Answer", "text": "Перед трансвагинальным УЗИ мочевой пузырь, наоборот, опорожняют. Наполненный пузырь нужен только для УЗИ через живот — обычно у девушек без половой жизни."}}, {"@type": "Question", "name": "Можно ли делать УЗИ во время месячных?", "acceptedAnswer": {"@type": "Answer", "text": "Можно, если это срочно или в последние дни менструации. Для планового осмотра удобнее 5–7-й день цикла."}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="logo" href="index.html">obgyn<span>·</span>tools</a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="kalkulyator-beremennosti.html">Беременность</a>
+      <a href="kalkulyator-ovulyacii.html">Овуляция</a>
+      <a href="kakaya-kontracepciya.html">Контрацепция</a>
+      <a href="podgotovka-k-uzi.html" aria-current="page">УЗИ</a>
+      <a href="rasshifrovka-citologii.html">Цитология</a>
+      <a href="shkala-menopauzy.html">Менопауза</a>
+      <a href="vracham.html">Для врачей</a>
+    </nav>
+  </header>
+  <div class="pagehead">
+    <h1>Подготовка к УЗИ малого таза</h1>
+    <p>Выберите, зачем вам УЗИ, и укажите первый день последней менструации — рассчитаем подходящие дни именно для вашего цикла.</p>
+  </div>
+
+  <div class="urgent" style="margin-bottom:16px"><b>Боль внизу живота, кровотечение, положительный тест с болью?</b> УЗИ делают в любой день цикла — не ждите «правильного» дня.</div>
+
+  <div class="pt-layout">
+    <div class="form">
+      <fieldset>
+        <legend>Зачем УЗИ</legend>
+        <label class="field" for="goal">Цель исследования
+          <select id="goal">
+            <option value="check">Профилактический осмотр</option>
+            <option value="myoma">Миома матки</option>
+            <option value="polyp">Полип, «утолщённый эндометрий»</option>
+            <option value="endo">Эндометриоз, аденомиоз</option>
+            <option value="cyst">Контроль кисты яичника</option>
+            <option value="folli">Отслеживание овуляции (фолликулометрия)</option>
+            <option value="luteal">Оценка жёлтого тела, второй фазы</option>
+            <option value="iud">Контроль спирали (ВМС)</option>
+            <option value="preg">Ранняя беременность</option>
+            <option value="meno">После менопаузы или на МГТ</option>
+          </select>
+        </label>
+      </fieldset>
+      <fieldset id="cycleBox">
+        <legend>Ваш цикл</legend>
+        <div class="row">
+          <label class="field" for="lmp">Первый день последней менструации<input type="date" id="lmp"></label>
+          <label class="field" for="cyc">Длина цикла, дней<input type="number" id="cyc" min="21" max="45" value="28" style="width:110px"></label>
+        </div>
+        <div class="checks" style="margin-top:10px">
+          <label class="chk"><input type="checkbox" id="virgo"><span>Не было половой жизни<small>исследование проводят через живот или через прямую кишку</small></span></label>
+        </div>
+      </fieldset>
+      <p class="note">Для примера: профилактический осмотр, менструация началась 3 дня назад.</p>
+    </div>
+    <aside class="results" id="res" aria-live="polite"></aside>
+  </div>
+
+  <article class="article">
+    <h2>Как подготовиться</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Способ</th><th>Подготовка</th></tr></thead>
+      <tbody>
+        <tr><td>Трансвагинальное УЗИ (датчик во влагалище)</td><td>Опорожните мочевой пузырь перед исследованием. Специально пить воду не нужно. Это основной и самый точный способ.</td></tr>
+        <tr><td>Через живот (трансабдоминальное)</td><td>Мочевой пузырь должен быть наполнен: выпейте 1–1,5 литра воды за час до исследования и не ходите в туалет.</td></tr>
+        <tr><td>Через прямую кишку (трансректальное)</td><td>Для девушек без половой жизни. Накануне — лёгкий ужин; при запорах врач может посоветовать микроклизму.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Если часто бывает вздутие, за 1–2 дня уменьшите количество бобовых, капусты, газированных напитков. Возьмите с собой прошлые заключения УЗИ, результаты анализов и помните дату начала последней менструации.</p>
+
+    <h2>Частые вопросы</h2>
+    <h3>Можно ли делать УЗИ во время месячных?</h3>
+    <p>Можно, если это срочно или идут последние дни менструации. Для планового осмотра удобнее 5–7-й день: эндометрий тонкий, полипы и другие образования видно лучше.</p>
+    <h3>Что если цикл нерегулярный?</h3>
+    <p>Ориентируйтесь на 5–7-й день от начала кровотечения. Если менструации нет долго — исследование можно сделать в любой день, а врач оценит результат с учётом этого.</p>
+    <h3>Больно ли это?</h3>
+    <p>Обычно нет. Возможен лёгкий дискомфорт. Если больно — скажите врачу, он изменит давление датчика.</p>
+  </article>
+  <footer class="site-foot">
+    <div>Составлено врачом акушером-гинекологом. Материалы носят информационный характер и не заменяют консультацию. <a href="index.html">Все инструменты для пациенток</a> · <a href="vracham.html">Для врачей</a> · <a href="about.html">Источники и конфиденциальность</a></div>
+    <div>© 2026 obgyntools</div>
+  </footer>
+</div>
+<script>
+const DAY=864e5, M=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const $=id=>document.getElementById(id);
+const today=()=>{const d=new Date();return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())};
+const parse=s=>{if(!s)return null;const [y,m,d]=s.split('-').map(Number);return Date.UTC(y,m-1,d)};
+const iso=t=>new Date(t).toISOString().slice(0,10);
+const fmt=t=>{const d=new Date(t);return d.getUTCDate()+' '+M[d.getUTCMonth()]};
+$('lmp').value=iso(today()-3*DAY);
+const G={
+  check:{d:[5,7],t:'Плановый осмотр',w:'Эндометрий тонкий, хорошо видно матку и яичники.'},
+  myoma:{d:[5,7],t:'Оценка миомы',w:'Размеры и расположение узлов лучше сравнивать в одну и ту же фазу — 5–7-й день.'},
+  polyp:{d:[5,7],t:'Полип или утолщённый эндометрий',w:'Сразу после менструации эндометрий тонкий, поэтому полип видно лучше всего. Во второй фазе толстый эндометрий может «прятать» полип или выглядеть как утолщение.'},
+  endo:{d:[5,10],t:'Эндометриоз, аденомиоз',w:'Обычно в первой фазе. Иногда врач просит повторить исследование во второй фазе — следуйте его указанию.'},
+  cyst:{d:[5,7],t:'Контроль кисты',w:'Функциональные кисты часто исчезают сами за 1–3 цикла. Контроль обычно делают на 5–7-й день следующего цикла.'},
+  folli:{folli:true,t:'Фолликулометрия',w:'Несколько исследований: первое — около 8–10-го дня цикла, дальше каждые 1–3 дня, пока фолликул не созреет и не произойдёт овуляция.'},
+  luteal:{luteal:true,t:'Жёлтое тело, вторая фаза',w:'Примерно через 7 дней после овуляции, то есть за 7 дней до ожидаемой менструации.'},
+  iud:{d:[5,10],t:'Контроль спирали',w:'Обычно через 4–6 недель после установки, затем по показаниям — в первой половине цикла.'},
+  preg:{preg:true,t:'Ранняя беременность',w:'Плодное яйцо в матке обычно видно с 5–6 недель от первого дня последней менструации (через 1–2 недели задержки). Раньше УЗИ может ничего не показать — это не значит, что что-то не так.'},
+  meno:{any:true,t:'После менопаузы или на МГТ',w:'После менопаузы — в любой день. На циклической МГТ — сразу после кровотечения отмены, на 5–7-й день от его начала.'}
+};
+function render(){
+  const g=$('goal').value, x=G[g];
+  const lmp=parse($('lmp').value), cyc=Math.min(45,Math.max(21,parseInt($('cyc').value)||28));
+  $('cycleBox').hidden=!!x.any;
+  let when='', dates='';
+  if(x.any){when='В любой удобный день'}
+  else if(lmp==null){when='Укажите дату менструации'}
+  else{
+    const cyc1=c=>lmp+c*cyc*DAY; // start of cycle k
+    let a,b;
+    if(x.folli){a=Math.max(8,cyc-20);b=cyc-12}
+    else if(x.luteal){a=cyc-8;b=cyc-6}
+    else if(x.preg){a=35;b=42}
+    else{a=x.d[0];b=x.d[1]}
+    // choose current or next cycle so that window ends today or later
+    let k=0; while(!x.preg && cyc1(k)+(b-1)*DAY<today()) k++;
+    const s=cyc1(k)+(a-1)*DAY, e=cyc1(k)+(b-1)*DAY;
+    when=x.preg?`${fmt(s)} – ${fmt(e)}`:`${a}–${b}-й день цикла`;
+    dates=x.preg?'5–6 недель от первого дня последней менструации':`${k?'Следующий цикл':'Этот цикл'}: <b>${fmt(s)} – ${fmt(e)}</b>`;
+  }
+  const how=$('virgo').checked?'Через живот (выпить 1–1,5 л воды за час) или через прямую кишку.':'Трансвагинально. Перед исследованием опорожните мочевой пузырь.';
+  $('res').innerHTML=`<div class="block"><h4>${x.t}</h4><div class="big" style="font-size:30px">${when}</div>${dates?`<p style="margin-top:6px">${dates}</p>`:''}<p class="note" style="margin-top:8px">${x.w}</p></div>
+  <div class="block"><h4>Как пройдёт</h4><p>${how}</p></div>
+  <p class="note">Даты рассчитаны для регулярного цикла. Если врач назначил другой день — следуйте его указанию.</p>`;
+}
+document.querySelector('.form').addEventListener('input',render);
+document.querySelector('.form').addEventListener('change',render);
+render();
+</script>
+</body>
+</html>
